@@ -1,0 +1,43 @@
+.tasks-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.tasks-page .page-header h1 {
+  margin: 0;
+}
+
+.tasks-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.filter-btn {
+  background: #ecf0f1;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7f8c8d;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover {
+  background: #bdc3c7;
+}
+
+.filter-btn.active {
+  background: #3498db;
+  color: #fff;
+}
+
+.tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}

@@ -4,19 +4,55 @@ import QuickAction from '../components/QuickAction';
 import './Dashboard.css';
 
 const Dashboard = () => {
-  const [totalSubjects, setTotalSubjects] = useState(0);
-
-  useEffect(() => {
-    const saved = localStorage.getItem('studysync_subjects');
-    if (saved) {
+  const [totalSubjects, setTotalSubjects] = useState(() => {
+    const savedSubjects = localStorage.getItem('studysync_subjects');
+    if (savedSubjects) {
       try {
-        const parsed = JSON.parse(saved);
-        setTotalSubjects(parsed.length);
+        const parsed = JSON.parse(savedSubjects) || [];
+        return parsed.length;
       } catch (e) {
-        console.error("Failed to load subjects for dashboard", e);
+        return 0;
       }
     }
-  }, []);
+    return 0;
+  });
+
+  const [subjects, setSubjects] = useState(() => {
+    const savedSubjects = localStorage.getItem('studysync_subjects');
+    if (savedSubjects) {
+      try {
+        return JSON.parse(savedSubjects) || [];
+      } catch (e) {
+        return [];
+      }
+    }
+    return [];
+  });
+
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem('studysync_tasks');
+    if (savedTasks) {
+      try {
+        return JSON.parse(savedTasks) || [];
+      } catch (e) {
+        return [];
+      }
+    }
+    return [];
+  });
+
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter(t => t.completed).length;
+
+  const upcomingTasks = tasks
+    .filter(t => !t.completed)
+    .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
+    .slice(0, 5); // Show only top 5
+
+  const getSubjectName = (id) => {
+    const sub = subjects.find(s => s.id === id);
+    return sub ? sub.name : 'Unknown Subject';
+  };
 
   return (
     <div className="dashboard">
@@ -32,8 +68,8 @@ const Dashboard = () => {
         {/* Summary Cards */}
         <section className="dashboard-section summary-section">
           <SummaryCard title="Total Subjects" value={totalSubjects.toString()} />
-          <SummaryCard title="Total Tasks" value="0" />
-          <SummaryCard title="Completed Tasks" value="0" />
+          <SummaryCard title="Total Tasks" value={totalTasks.toString()} />
+          <SummaryCard title="Completed Tasks" value={completedTasks.toString()} />
           <SummaryCard title="Study Hours" value="0" />
           <SummaryCard title="Overall Progress" value="0%" />
         </section>
@@ -43,9 +79,26 @@ const Dashboard = () => {
             {/* Upcoming Tasks */}
             <section className="dashboard-section list-section">
               <h3 className="section-title">Upcoming Tasks</h3>
-              <div className="empty-state">
-                <p>No upcoming tasks.</p>
-              </div>
+              {upcomingTasks.length === 0 ? (
+                <div className="empty-state">
+                  <p>No upcoming tasks.</p>
+                </div>
+              ) : (
+                <div className="upcoming-tasks-list">
+                  {upcomingTasks.map(task => (
+                    <div key={task.id} className="upcoming-task-item">
+                      <div className="upcoming-task-info">
+                        <span className="upcoming-task-title">{task.title}</span>
+                        <span className="upcoming-task-subject">{getSubjectName(task.subjectId)}</span>
+                      </div>
+                      <div className="upcoming-task-meta">
+                        <span className="upcoming-task-date">{task.dueDate}</span>
+                        <span className={`task-priority priority-${task.priority.toLowerCase()}`}>{task.priority}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </section>
 
             {/* Today's Schedule */}

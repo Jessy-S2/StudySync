@@ -126,3 +126,71 @@
   color: #2c3e50;
   font-weight: 600;
 }
+
+/* Upcoming Tasks List Styles */
+.upcoming-tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.upcoming-task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border-radius: 6px;
+  background-color: #f8f9fa;
+  border: 1px solid #eef0f2;
+}
+
+.upcoming-task-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.upcoming-task-title {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 15px;
+}
+
+.upcoming-task-subject {
+  font-size: 12px;
+  color: #7f8c8d;
+}
+
+.upcoming-task-meta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.upcoming-task-date {
+  font-size: 13px;
+  color: #95a5a6;
+}
+
+.task-priority {
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.priority-low {
+  background-color: rgba(46, 204, 113, 0.15);
+  color: #27ae60;
+}
+
+.priority-medium {
+  background-color: rgba(241, 196, 15, 0.15);
+  color: #d35400;
+}
+
+.priority-high {
+  background-color: rgba(231, 76, 60, 0.15);
+  color: #c0392b;
+}
