@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SummaryCard from '../components/SummaryCard';
 import QuickAction from '../components/QuickAction';
 import './Dashboard.css';
 
 const Dashboard = () => {
+  const [totalSubjects, setTotalSubjects] = useState(0);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('studysync_subjects');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setTotalSubjects(parsed.length);
+      } catch (e) {
+        console.error("Failed to load subjects for dashboard", e);
+      }
+    }
+  }, []);
+
   return (
     <div className="dashboard">
       <div className="dashboard-header">
@@ -17,6 +31,7 @@ const Dashboard = () => {
       <div className="dashboard-grid">
         {/* Summary Cards */}
         <section className="dashboard-section summary-section">
+          <SummaryCard title="Total Subjects" value={totalSubjects.toString()} />
           <SummaryCard title="Total Tasks" value="0" />
           <SummaryCard title="Completed Tasks" value="0" />
           <SummaryCard title="Study Hours" value="0" />
