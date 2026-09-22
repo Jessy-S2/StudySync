@@ -41,6 +41,18 @@ const Dashboard = () => {
     return [];
   });
 
+  const [schedule, setSchedule] = useState(() => {
+    const savedSchedule = localStorage.getItem('studysync_schedule');
+    if (savedSchedule) {
+      try {
+        return JSON.parse(savedSchedule) || [];
+      } catch (e) {
+        return [];
+      }
+    }
+    return [];
+  });
+
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter(t => t.completed).length;
 
@@ -48,6 +60,19 @@ const Dashboard = () => {
     .filter(t => !t.completed)
     .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
     .slice(0, 5); // Show only top 5
+
+  const getTodayString = () => {
+    const today = new Date();
+    const y = today.getFullYear();
+    const m = String(today.getMonth() + 1).padStart(2, '0');
+    const d = String(today.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+  };
+
+  const todayStr = getTodayString();
+  const todaysSessions = schedule
+    .filter(s => s.date === todayStr)
+    .sort((a, b) => a.startTime > b.startTime ? 1 : -1);
 
   const getSubjectName = (id) => {
     const sub = subjects.find(s => s.id === id);
@@ -104,9 +129,26 @@ const Dashboard = () => {
             {/* Today's Schedule */}
             <section className="dashboard-section list-section">
               <h3 className="section-title">Today's Schedule</h3>
-              <div className="empty-state">
-                <p>No study sessions scheduled for today.</p>
-              </div>
+              {todaysSessions.length === 0 ? (
+                <div className="empty-state">
+                  <p>No study sessions scheduled for today.</p>
+                </div>
+              ) : (
+                <div className="upcoming-tasks-list">
+                  {todaysSessions.map(sess => (
+                    <div key={sess.id} className={`upcoming-task-item ${sess.completed ? 'completed' : ''}`}>
+                      <div className="upcoming-task-info">
+                        <span className="upcoming-task-title" style={sess.completed ? { textDecoration: 'line-through', color: '#7f8c8d' } : {}}>{getSubjectName(sess.subjectId)}</span>
+                        <span className="upcoming-task-subject">{sess.duration} min</span>
+                      </div>
+                      <div className="upcoming-task-meta">
+                        <span className="upcoming-task-date" style={{ fontWeight: 'bold' }}>{sess.startTime}</span>
+                        {sess.completed && <span className="task-priority priority-low">Done</span>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </section>
           </div>
 
