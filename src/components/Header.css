@@ -1,0 +1,23 @@
+.app-header {
+  height: 60px;
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.header-search input {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  width: 250px;
+  outline: none;
+}
+
+.header-profile span {
+  font-weight: 500;
+  color: #333;
+}
