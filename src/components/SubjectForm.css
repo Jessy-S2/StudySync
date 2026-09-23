@@ -1,4 +1,4 @@
-.modal-overlay {
+﻿.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,7 +12,7 @@
 }
 
 .modal-content {
-  background: #fff;
+  background: #1e1e1e;
   padding: 30px;
   border-radius: 8px;
   width: 100%;
@@ -22,18 +22,18 @@
 
 .modal-title {
   margin: 0 0 20px 0;
-  color: #2c3e50;
+  color: #ffffff;
   font-size: 22px;
 }
 
 .form-error {
-  background-color: #fdeaea;
+  background-color: rgba(231,76,60,0.15);
   color: #e74c3c;
   padding: 12px;
   border-radius: 6px;
   margin-bottom: 20px;
   font-size: 14px;
-  border: 1px solid #fad2d2;
+  border: 1px solid rgba(231,76,60,0.3);
 }
 
 .subject-form {
@@ -50,14 +50,14 @@
 
 .form-group label {
   font-size: 14px;
-  color: #34495e;
+  color: #b0b0b0;
   font-weight: 500;
 }
 
 .form-group input,
 .form-group textarea {
   padding: 10px 12px;
-  border: 1px solid #dcdde1;
+  border: 1px solid #333;
   border-radius: 6px;
   font-size: 15px;
   font-family: inherit;
@@ -89,8 +89,8 @@
 }
 
 .btn-cancel {
-  background-color: #ecf0f1;
-  color: #7f8c8d;
+  background-color: #242424;
+  color: #b0b0b0;
 }
 
 .btn-cancel:hover {
@@ -105,3 +105,4 @@
 .btn-submit:hover {
   background-color: #2980b9;
 }
+

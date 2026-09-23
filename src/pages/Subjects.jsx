@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SubjectCard from '../components/SubjectCard';
 import SubjectForm from '../components/SubjectForm';
 import './Subjects.css';
 
 const Subjects = () => {
+  const navigate = useNavigate();
   const [subjects, setSubjects] = useState(() => {
     const saved = localStorage.getItem('studysync_subjects');
     if (saved) {
@@ -62,6 +64,10 @@ const Subjects = () => {
     setIsFormOpen(true);
   };
 
+  const handleSubjectClick = (id) => {
+    navigate(`/subjects/${id}`);
+  };
+
   return (
     <div className="generic-page subjects-page">
       <div className="page-header">
@@ -79,6 +85,7 @@ const Subjects = () => {
             <SubjectCard 
               key={subject.id} 
               subject={subject} 
+              onClick={handleSubjectClick}
               onEdit={handleEditSubject}
               onDelete={handleDeleteSubject}
             />

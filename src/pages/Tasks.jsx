@@ -3,7 +3,7 @@ import TaskCard from '../components/TaskCard';
 import TaskForm from '../components/TaskForm';
 import './Tasks.css';
 
-const Tasks = () => {
+const Tasks = ({ subjectIdFilter }) => {
   const [tasks, setTasks] = useState(() => {
     const saved = localStorage.getItem('studysync_tasks');
     if (saved) {
@@ -92,6 +92,7 @@ const Tasks = () => {
 
   // Filter and Sort
   const filteredTasks = tasks.filter(task => {
+    if (subjectIdFilter && task.subjectId !== subjectIdFilter) return false;
     if (filter === 'Active') return !task.completed;
     if (filter === 'Completed') return task.completed;
     return true;
@@ -105,32 +106,41 @@ const Tasks = () => {
   });
 
   return (
-    <div className="generic-page tasks-page">
-      <div className="page-header">
-        <h1>Tasks</h1>
-        <button className="btn-primary" onClick={handleOpenForm}>Add Task</button>
-      </div>
+    <div className={`tasks-page ${subjectIdFilter ? 'nested-tasks' : 'generic-page'}`}>
+      {!subjectIdFilter ? (
+        <div className="page-header">
+          <h1>Tasks</h1>
+          <button className="btn-primary" onClick={handleOpenForm}>Add Task</button>
+        </div>
+      ) : (
+        <div className="tab-section-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <h2 style={{ margin: 0, color: '#2c3e50', fontSize: '20px' }}>Subject Tasks</h2>
+          <button className="btn-primary" onClick={handleOpenForm}>Add Task</button>
+        </div>
+      )}
 
-      <div className="tasks-filters">
-        <button 
-          className={`filter-btn ${filter === 'All' ? 'active' : ''}`}
-          onClick={() => setFilter('All')}
-        >
-          All
-        </button>
-        <button 
-          className={`filter-btn ${filter === 'Active' ? 'active' : ''}`}
-          onClick={() => setFilter('Active')}
-        >
-          Active
-        </button>
-        <button 
-          className={`filter-btn ${filter === 'Completed' ? 'active' : ''}`}
-          onClick={() => setFilter('Completed')}
-        >
-          Completed
-        </button>
-      </div>
+      {!subjectIdFilter && (
+        <div className="tasks-filters">
+          <button 
+            className={`filter-btn ${filter === 'All' ? 'active' : ''}`}
+            onClick={() => setFilter('All')}
+          >
+            All
+          </button>
+          <button 
+            className={`filter-btn ${filter === 'Active' ? 'active' : ''}`}
+            onClick={() => setFilter('Active')}
+          >
+            Active
+          </button>
+          <button 
+            className={`filter-btn ${filter === 'Completed' ? 'active' : ''}`}
+            onClick={() => setFilter('Completed')}
+          >
+            Completed
+          </button>
+        </div>
+      )}
       
       {sortedTasks.length === 0 ? (
         <div className="empty-state">
@@ -155,6 +165,7 @@ const Tasks = () => {
         <TaskForm 
           initialData={editingTask} 
           subjects={subjects}
+          fixedSubjectId={subjectIdFilter}
           onSubmit={handleSaveTask} 
           onCancel={handleCloseForm} 
         />

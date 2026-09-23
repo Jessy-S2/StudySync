@@ -1,9 +1,9 @@
 .task-card {
-  background: #fff;
+  background: #1e1e1e;
   padding: 15px 20px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  border: 1px solid #e0e0e0;
+  border: 1px solid #333;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -16,7 +16,7 @@
 
 .task-card.completed .task-card-title {
   text-decoration: line-through;
-  color: #7f8c8d;
+  color: #b0b0b0;
 }
 
 .task-card-header {
@@ -40,7 +40,7 @@
 
 .task-card-title {
   margin: 0;
-  color: #2c3e50;
+  color: #ffffff;
   font-size: 18px;
   font-weight: 600;
 }
@@ -52,7 +52,7 @@
 
 .task-card-description {
   margin: 0 0 0 30px;
-  color: #7f8c8d;
+  color: #b0b0b0;
   font-size: 14px;
 }
 
@@ -66,7 +66,7 @@
 }
 
 .task-subject {
-  background-color: #ecf0f1;
+  background-color: #242424;
   color: #34495e;
   padding: 4px 8px;
   border-radius: 4px;
@@ -75,7 +75,7 @@
 }
 
 .task-due-date {
-  color: #7f8c8d;
+  color: #b0b0b0;
   font-size: 13px;
 }
 

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './TaskForm.css';
 
-const TaskForm = ({ initialData, subjects, onSubmit, onCancel }) => {
+const TaskForm = ({ initialData, subjects, onSubmit, onCancel, fixedSubjectId }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [subjectId, setSubjectId] = useState('');
+  const [subjectId, setSubjectId] = useState(fixedSubjectId || '');
   const [dueDate, setDueDate] = useState('');
   const [priority, setPriority] = useState('Medium');
   const [error, setError] = useState('');
@@ -16,8 +16,10 @@ const TaskForm = ({ initialData, subjects, onSubmit, onCancel }) => {
       setSubjectId(initialData.subjectId);
       setDueDate(initialData.dueDate);
       setPriority(initialData.priority);
+    } else if (fixedSubjectId) {
+      setSubjectId(fixedSubjectId);
     }
-  }, [initialData]);
+  }, [initialData, fixedSubjectId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -87,7 +89,7 @@ const TaskForm = ({ initialData, subjects, onSubmit, onCancel }) => {
             
             <div className="form-group">
               <label>Subject *</label>
-              <select value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
+              <select value={subjectId} onChange={(e) => setSubjectId(e.target.value)} disabled={!!fixedSubjectId}>
                 <option value="">-- Select Subject --</option>
                 {subjects.map(sub => (
                   <option key={sub.id} value={sub.id}>{sub.name}</option>

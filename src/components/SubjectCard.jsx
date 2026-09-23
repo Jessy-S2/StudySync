@@ -1,7 +1,7 @@
 import React from 'react';
 import './SubjectCard.css';
 
-const SubjectCard = ({ subject, onEdit, onDelete }) => {
+const SubjectCard = ({ subject, onClick, onEdit, onDelete }) => {
   const { name, description, targetHours, currentHours } = subject;
   
   const progressPercent = targetHours > 0 
@@ -9,12 +9,12 @@ const SubjectCard = ({ subject, onEdit, onDelete }) => {
     : 0;
 
   return (
-    <div className="subject-card">
+    <div className="subject-card" onClick={() => onClick && onClick(subject.id)} style={{ cursor: onClick ? 'pointer' : 'default' }}>
       <div className="subject-card-header">
         <h3 className="subject-card-title">{name}</h3>
         <div className="subject-card-actions">
-          <button className="icon-btn edit-btn" onClick={() => onEdit(subject)}>Edit</button>
-          <button className="icon-btn delete-btn" onClick={() => onDelete(subject.id)}>Delete</button>
+          <button className="icon-btn edit-btn" onClick={(e) => { e.stopPropagation(); onEdit(subject); }}>Edit</button>
+          <button className="icon-btn delete-btn" onClick={(e) => { e.stopPropagation(); onDelete(subject.id); }}>Delete</button>
         </div>
       </div>
       

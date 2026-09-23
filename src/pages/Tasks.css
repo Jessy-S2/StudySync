@@ -1,4 +1,4 @@
-.tasks-page .page-header {
+﻿.tasks-page .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,13 +16,13 @@
 }
 
 .filter-btn {
-  background: #ecf0f1;
+  background: #333;
   border: none;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
-  color: #7f8c8d;
+  color: #b0b0b0;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -41,3 +41,4 @@
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 20px;
 }
+
