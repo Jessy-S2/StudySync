@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../components/UnitModal.css'; // Reuse existing styles for file uploads
 import { saveFile, getFile, deleteFile } from '../utils/fileStorage';
+import { useUI } from '../context/UIContext';
 
 const UnitMaterials = () => {
   const { subjectId, unitId } = useParams();
   const navigate = useNavigate();
+  const { showConfirm, showAlert } = useUI();
 
   const [unit, setUnit] = useState(null);
   const [subjectName, setSubjectName] = useState('');
@@ -58,7 +60,7 @@ const UnitMaterials = () => {
         });
       } catch (err) {
         console.error(err);
-        alert(`Failed to save file ${file.name}`);
+        showAlert(`Failed to save file ${file.name}`, "error");
       }
     }
 
@@ -81,7 +83,7 @@ const UnitMaterials = () => {
   };
 
   const handleRemoveMaterial = async (id) => {
-    if (window.confirm("Remove this material?")) {
+    showConfirm("Remove Material", "Are you sure you want to remove this material?", async () => {
       try {
         await deleteFile(id);
       } catch (err) {
@@ -99,7 +101,8 @@ const UnitMaterials = () => {
       const savedUnits = JSON.parse(localStorage.getItem('studysync_units') || '[]');
       const updatedUnits = savedUnits.map(u => u.id === unitId ? updatedUnit : u);
       localStorage.setItem('studysync_units', JSON.stringify(updatedUnits));
-    }
+      showAlert("Material removed.", "info");
+    });
   };
 
   const handleOpenFile = async (id) => {
@@ -110,11 +113,11 @@ const UnitMaterials = () => {
         window.open(url, '_blank');
         setTimeout(() => URL.revokeObjectURL(url), 10000); // Cleanup after a bit
       } else {
-        alert("File is no longer available for opening (legacy metadata only).");
+        showAlert("File is no longer available for opening (legacy metadata only).", "error");
       }
     } catch (e) {
       console.error(e);
-      alert("Error opening file.");
+      showAlert("Error opening file.", "error");
     }
   };
 
@@ -131,11 +134,11 @@ const UnitMaterials = () => {
         document.body.removeChild(a);
         setTimeout(() => URL.revokeObjectURL(url), 10000);
       } else {
-        alert("File is no longer available for downloading (legacy metadata only).");
+        showAlert("File is no longer available for downloading (legacy metadata only).", "error");
       }
     } catch (e) {
       console.error(e);
-      alert("Error downloading file.");
+      showAlert("Error downloading file.", "error");
     }
   };
 
@@ -197,3 +200,6 @@ const UnitMaterials = () => {
 };
 
 export default UnitMaterials;
+
+
+

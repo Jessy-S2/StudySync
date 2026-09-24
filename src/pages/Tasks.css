@@ -16,13 +16,13 @@
 }
 
 .filter-btn {
-  background: #333;
+  background: #E6E4EF;
   border: none;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
-  color: #b0b0b0;
+  color: #6F6878;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -32,8 +32,8 @@
 }
 
 .filter-btn.active {
-  background: #3498db;
-  color: #fff;
+  background: #5B2DBB;
+  color: #FFFFFF;
 }
 
 .tasks-grid {
@@ -41,4 +41,8 @@
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 20px;
 }
+
+
+
+
 

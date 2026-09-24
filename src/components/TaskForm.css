@@ -1,4 +1,4 @@
-.task-form {
+﻿.task-form {
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -20,11 +20,15 @@
   font-size: 15px;
   font-family: inherit;
   outline: none;
-  background-color: #1e1e1e;
+  background-color: #2D2438;
   transition: border-color 0.2s;
   cursor: pointer;
 }
 
 .form-group select:focus {
-  border-color: #3498db;
+  border-color: #5B2DBB;
 }
+
+
+
+

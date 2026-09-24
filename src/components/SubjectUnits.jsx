@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UnitModal from './UnitModal';
+import { useUI } from '../context/UIContext';
 import { saveFile, deleteFile } from '../utils/fileStorage';
 
 const SubjectUnits = ({ subjectId }) => {
   const navigate = useNavigate();
+  const { showConfirm, showAlert } = useUI();
   const [units, setUnits] = useState(() => {
     const saved = localStorage.getItem('studysync_units');
     if (saved) {
@@ -51,7 +53,7 @@ const SubjectUnits = ({ subjectId }) => {
           await saveFile(mat.id, subjectId, unitId, mat.rawFile);
         } catch (e) {
           console.error(e);
-          alert(`Failed to save file ${mat.name}`);
+          showAlert(`Failed to save file ${mat.name}`, "error");
         }
       }
     }
@@ -87,7 +89,7 @@ const SubjectUnits = ({ subjectId }) => {
   };
 
   const handleDeleteUnit = async (id) => {
-    if (window.confirm("Are you sure you want to delete this unit? This will also remove it from Notes.")) {
+    showConfirm("Delete Unit", "Are you sure you want to delete this unit? This will also remove it from Notes.", async () => {
       const unitToDelete = units.find(u => u.id === id);
       if (unitToDelete && unitToDelete.materials) {
         for (const mat of unitToDelete.materials) {
@@ -99,7 +101,8 @@ const SubjectUnits = ({ subjectId }) => {
         }
       }
       setUnits(units.filter(u => u.id !== id));
-    }
+      showAlert("Unit deleted.", "info");
+    });
   };
 
   const handleEditUnit = (unit) => {
@@ -109,10 +112,7 @@ const SubjectUnits = ({ subjectId }) => {
 
   return (
     <div className="subject-units">
-      <div className="tab-section-header">
-        <h2>Units</h2>
-        <button className="btn-primary" onClick={handleOpenModal}>Add Unit</button>
-      </div>
+      <div className="tab-section-header" style={{ display: "flex", justifyContent: "flex-end", marginBottom: "20px" }}>        <button className="btn-primary" onClick={handleOpenModal}>+ Add Unit</button>      </div>
 
       {subjectUnits.length === 0 ? (
         <div className="empty-state">
@@ -164,3 +164,7 @@ const SubjectUnits = ({ subjectId }) => {
 };
 
 export default SubjectUnits;
+
+
+
+

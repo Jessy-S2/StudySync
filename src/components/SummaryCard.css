@@ -1,9 +1,9 @@
-.summary-card {
-  background: #1e1e1e;
+﻿.summary-card {
+  background: #FFFFFF;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  border: 1px solid #333;
+  border: 1px solid #E6E4EF;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -11,7 +11,7 @@
 
 .summary-card-title {
   margin: 0 0 10px 0;
-  color: #b0b0b0;
+  color: #6F6878;
   font-size: 14px;
   font-weight: 500;
   text-transform: uppercase;
@@ -20,7 +20,9 @@
 
 .summary-card-value {
   margin: 0;
-  color: #ffffff;
+  color: #2D2438;
   font-size: 28px;
   font-weight: 700;
 }
+
+

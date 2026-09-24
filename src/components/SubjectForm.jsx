@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import './SubjectForm.css';
 
 const SubjectForm = ({ initialData, onSubmit, onCancel }) => {
@@ -24,16 +24,12 @@ const SubjectForm = ({ initialData, onSubmit, onCancel }) => {
       return;
     }
 
-    const targetH = parseFloat(targetHours);
-    if (isNaN(targetH) || targetH <= 0) {
-      setError('Target study hours must be a positive number.');
-      return;
-    }
+    
 
     onSubmit({
       name: name.trim(),
       description: description.trim(),
-      targetHours: targetH
+      
     });
   };
 
@@ -65,16 +61,7 @@ const SubjectForm = ({ initialData, onSubmit, onCancel }) => {
             />
           </div>
           
-          <div className="form-group">
-            <label>Target Study Hours *</label>
-            <input 
-              type="number" 
-              step="0.5"
-              value={targetHours} 
-              onChange={(e) => setTargetHours(e.target.value)} 
-              placeholder="e.g. 20"
-            />
-          </div>
+          
           
           <div className="form-actions">
             <button type="button" className="btn-cancel" onClick={onCancel}>Cancel</button>
@@ -87,3 +74,5 @@ const SubjectForm = ({ initialData, onSubmit, onCancel }) => {
 };
 
 export default SubjectForm;
+
+

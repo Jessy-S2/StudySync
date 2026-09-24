@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUI } from '../context/UIContext';
 import SubjectCard from '../components/SubjectCard';
 import SubjectForm from '../components/SubjectForm';
 import './Subjects.css';
 
 const Subjects = () => {
   const navigate = useNavigate();
+  const { showConfirm, showAlert } = useUI();
   const [subjects, setSubjects] = useState(() => {
     const saved = localStorage.getItem('studysync_subjects');
     if (saved) {
@@ -17,6 +19,10 @@ const Subjects = () => {
       }
     }
     return [];
+  });
+  const [units] = useState(() => {
+    const saved = localStorage.getItem('studysync_units');
+    return saved ? JSON.parse(saved) : [];
   });
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingSubject, setEditingSubject] = useState(null);
@@ -54,9 +60,10 @@ const Subjects = () => {
   };
 
   const handleDeleteSubject = (id) => {
-    if (window.confirm("Are you sure you want to delete this subject?")) {
+    showConfirm("Delete Subject", "Are you sure you want to delete this subject?", () => {
       setSubjects(subjects.filter(sub => sub.id !== id));
-    }
+      showAlert("Subject deleted.", "info");
+    });
   };
 
   const handleEditSubject = (subject) => {
@@ -82,9 +89,7 @@ const Subjects = () => {
       ) : (
         <div className="subjects-grid">
           {subjects.map(subject => (
-            <SubjectCard 
-              key={subject.id} 
-              subject={subject} 
+            <SubjectCard key={subject.id} subject={subject} unitCount={units.filter(u => u.subjectId === subject.id).length} 
               onClick={handleSubjectClick}
               onEdit={handleEditSubject}
               onDelete={handleDeleteSubject}
@@ -105,3 +110,6 @@ const Subjects = () => {
 };
 
 export default Subjects;
+
+
+

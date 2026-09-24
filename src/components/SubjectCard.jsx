@@ -1,13 +1,9 @@
 import React from 'react';
 import './SubjectCard.css';
 
-const SubjectCard = ({ subject, onClick, onEdit, onDelete }) => {
-  const { name, description, targetHours, currentHours } = subject;
+const SubjectCard = ({ subject, unitCount = 0, onClick, onEdit, onDelete }) => {
+  const { name, description } = subject;
   
-  const progressPercent = targetHours > 0 
-    ? Math.min(Math.round((currentHours / targetHours) * 100), 100) 
-    : 0;
-
   return (
     <div className="subject-card" onClick={() => onClick && onClick(subject.id)} style={{ cursor: onClick ? 'pointer' : 'default' }}>
       <div className="subject-card-header">
@@ -21,23 +17,7 @@ const SubjectCard = ({ subject, onClick, onEdit, onDelete }) => {
       {description && <p className="subject-card-description">{description}</p>}
       
       <div className="subject-card-stats">
-        <div className="stat">
-          <span className="stat-label">Current</span>
-          <span className="stat-value">{currentHours}h</span>
-        </div>
-        <div className="stat">
-          <span className="stat-label">Target</span>
-          <span className="stat-value">{targetHours}h</span>
-        </div>
-      </div>
-      
-      <div className="subject-card-progress">
-        <div className="progress-container">
-          <div className="progress-bar-bg">
-            <div className="progress-bar-fill" style={{ width: `${progressPercent}%` }}></div>
-          </div>
-          <div className="progress-value">{progressPercent}%</div>
-        </div>
+        <span className="stat-label">{unitCount} {unitCount === 1 ? "unit" : "units"}</span>
       </div>
     </div>
   );

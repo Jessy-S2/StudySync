@@ -6,11 +6,16 @@
 
 .main-content {
   flex: 1;
-  margin-left: 210px; /* Same as sidebar width */
+  margin-left: 240px; /* Same as sidebar width */
   display: flex;
   flex-direction: column;
-  background-color: #121212;
+  background-color: #F7F8FC;
   min-height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+.app-container.sidebar-collapsed .main-content {
+  margin-left: 80px; /* Collapsed width */
 }
 
 .page-content {
@@ -23,12 +28,12 @@
 
 .generic-page h1 {
   margin: 0 0 30px 0;
-  color: #ffffff;
+  color: #2D2438;
   font-size: 28px;
 }
 
 .generic-page p {
-  color: #b0b0b0;
+  color: #6F6878;
 }
 
 * {
@@ -56,3 +61,4 @@
     margin-left: 0;
   }
 }
+

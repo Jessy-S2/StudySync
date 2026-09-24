@@ -1,4 +1,4 @@
-.timer-layout {
+﻿.timer-layout {
   display: flex;
   gap: 30px;
   align-items: flex-start;
@@ -22,11 +22,11 @@
 }
 
 .timer-setup-card {
-  background: #1e1e1e;
+  background: #FFFFFF;
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  border: 1px solid #333;
+  border: 1px solid #E6E4EF;
 }
 
 .setup-controls {
@@ -35,13 +35,13 @@
   gap: 20px;
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #E6E4EF;
 }
 
 .form-group label {
   display: block;
   font-size: 14px;
-  color: #34495e;
+  color: #17143A;
   font-weight: 500;
   margin-bottom: 8px;
 }
@@ -54,18 +54,18 @@
   font-size: 15px;
   font-family: inherit;
   outline: none;
-  background-color: #1e1e1e;
+  background-color: #FFFFFF;
 }
 
 .form-group select:disabled {
-  background-color: #242424;
+  background-color: #F8F5FC;
   cursor: not-allowed;
 }
 
 .duration-selector label {
   display: block;
   font-size: 14px;
-  color: #34495e;
+  color: #17143A;
   font-weight: 500;
   margin-bottom: 8px;
 }
@@ -77,13 +77,13 @@
 }
 
 .preset-btn {
-  background-color: #242424;
+  background-color: #F8F5FC;
   border: 1px solid transparent;
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
-  color: #ffffff;
+  color: #FFFFFF;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -98,7 +98,7 @@
 }
 
 .preset-btn.active {
-  background-color: #3498db;
+  background-color: #5B2DBB;
   color: white;
 }
 
@@ -113,7 +113,7 @@
 }
 
 .custom-duration-input:disabled {
-  background-color: #242424;
+  background-color: #F8F5FC;
   cursor: not-allowed;
 }
 
@@ -127,16 +127,16 @@
 }
 
 .side-card {
-  background: #1e1e1e;
+  background: #FFFFFF;
   padding: 25px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  border: 1px solid #333;
+  border: 1px solid #E6E4EF;
 }
 
 .side-card h3 {
   margin: 0 0 15px 0;
-  color: #ffffff;
+  color: #FFFFFF;
   font-size: 16px;
   font-weight: 600;
 }
@@ -150,7 +150,7 @@
 }
 
 .empty-sessions {
-  color: #b0b0b0;
+  color: #6F6878;
   font-style: italic;
   font-size: 14px;
   margin: 0;
@@ -183,3 +183,9 @@
   background-color: #e74c3c;
   color: white;
 }
+
+
+
+
+
+

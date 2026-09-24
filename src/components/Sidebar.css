@@ -1,45 +1,101 @@
 .sidebar {
-  width: 210px;
+  width: 240px;
   height: 100vh;
-  background-color: #151515;
-  border-right: 1px solid #252525;
-  color: #ecf0f1;
+  background-color: #F0EEFC;
   position: fixed;
   top: 0;
   left: 0;
   display: flex;
   flex-direction: column;
+  transition: width 0.3s ease;
+  z-index: 100;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar-brand-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 24px 24px 24px;
+}
+
+.sidebar.collapsed .sidebar-brand-wrapper {
+  padding: 30px 0 24px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
 .sidebar-brand {
-  padding: 30px 20px 20px 20px;
   display: flex;
   align-items: center;
   gap: 12px;
+  overflow: hidden;
+}
+
+.sidebar.collapsed .sidebar-brand {
+  justify-content: center;
 }
 
 .brand-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  background-color: #7C4DFF;
-  padding: 6px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(124, 77, 255, 0.4);
+  color: #FFFFFF;
+  background-color: #5B2DBB;
+  min-width: 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(91, 45, 187, 0.2);
 }
 
-.sidebar-brand h2 {
+.brand-text {
   margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  color: #fff;
-  letter-spacing: -0.2px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #17143A;
+  white-space: nowrap;
+  transition: opacity 0.2s ease, width 0.2s ease;
+}
+
+.sidebar.collapsed .brand-text {
+  opacity: 0;
+  width: 0;
+  display: none;
+}
+
+.sidebar-toggle-btn {
+  background: transparent;
+  border: none;
+  color: #686579;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.sidebar-toggle-btn:hover {
+  background-color: rgba(91, 45, 187, 0.1);
+  color: #5B2DBB;
 }
 
 .sidebar-nav {
-  padding: 10px 12px;
+  padding: 0 16px;
   flex: 1;
+}
+
+.sidebar.collapsed .sidebar-nav {
+  padding: 0 12px;
 }
 
 .sidebar-nav ul {
@@ -48,43 +104,102 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-}
-
-.sidebar-nav li {
-  padding: 0;
+  gap: 8px;
 }
 
 .sidebar-nav a {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 0 14px;
-  height: 40px;
-  color: #A8A8A8;
+  gap: 14px;
+  padding: 0 16px;
+  height: 48px;
+  color: #686579;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 15px;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar.collapsed .sidebar-nav a {
+  padding: 0;
+  justify-content: center;
 }
 
 .sidebar-nav a:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: #fff;
+  background-color: rgba(91, 45, 187, 0.05);
+  color: #17143A;
 }
 
 .sidebar-nav a.active {
-  background-color: #7C4DFF;
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(124, 77, 255, 0.3);
+  background-color: #E2DBF8;
+  color: #17143A;
+  font-weight: 600;
 }
 
 .sidebar-nav a svg {
-  opacity: 0.8;
+  color: #686579;
+  min-width: 20px;
 }
 
-.sidebar-nav a.active svg,
-.sidebar-nav a:hover svg {
-  opacity: 1;
+.sidebar-nav a.active svg {
+  color: #5B2DBB;
+}
+
+.sidebar-bottom {
+  padding: 24px 16px;
+  border-top: 1px solid rgba(91, 45, 187, 0.1);
+}
+
+.sidebar.collapsed .sidebar-bottom {
+  padding: 24px 12px;
+}
+
+.settings-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 16px;
+  height: 48px;
+  color: #686579;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar.collapsed .settings-link {
+  padding: 0;
+  justify-content: center;
+}
+
+.settings-link:hover {
+  background-color: rgba(91, 45, 187, 0.05);
+  color: #17143A;
+}
+
+.settings-link.active {
+  background-color: #E2DBF8;
+  color: #17143A;
+  font-weight: 600;
+}
+
+.settings-link svg {
+  color: #686579;
+  min-width: 20px;
+}
+
+.settings-link.active svg {
+  color: #5B2DBB;
+}
+
+.sidebar.collapsed .nav-text {
+  opacity: 0;
+  width: 0;
+  display: none;
 }

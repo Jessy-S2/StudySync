@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import TimerDisplay from '../components/TimerDisplay';
 import TimerControls from '../components/TimerControls';
 import StudySessionCard from '../components/StudySessionCard';
 import './StudyTimer.css';
+import { useUI } from '../context/UIContext';
 
 const PRESETS = [25, 45, 60];
 
@@ -19,6 +20,7 @@ const StudyTimer = () => {
     return [];
   });
 
+  const { showConfirm, showAlert } = useUI();
   const [completedSessions, setCompletedSessions] = useState(() => {
     const saved = localStorage.getItem('studysync_study_sessions');
     if (saved) {
@@ -136,9 +138,10 @@ const StudyTimer = () => {
   };
 
   const handleClearSessions = () => {
-    if (window.confirm("Are you sure you want to clear all recent study sessions?")) {
+    showConfirm("Clear Sessions", "Are you sure you want to clear all recent study sessions?", () => {
       setCompletedSessions([]);
-    }
+      showAlert("Sessions cleared.", "info");
+    });
   };
 
   // Recent 5
@@ -260,3 +263,5 @@ const StudyTimer = () => {
 };
 
 export default StudyTimer;
+
+

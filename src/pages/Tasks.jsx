@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import TaskCard from '../components/TaskCard';
 import TaskForm from '../components/TaskForm';
 import './Tasks.css';
+import { useUI } from '../context/UIContext';
 
 const Tasks = ({ subjectIdFilter }) => {
+  const { showConfirm, showAlert } = useUI();
   const [tasks, setTasks] = useState(() => {
     const saved = localStorage.getItem('studysync_tasks');
     if (saved) {
@@ -50,7 +52,7 @@ const Tasks = ({ subjectIdFilter }) => {
 
   const handleSaveTask = (data) => {
     if (editingTask) {
-      setTasks(tasks.map(task => 
+      setTasks(prevTasks => prevTasks.map(task => 
         task.id === editingTask.id 
           ? { ...task, ...data } 
           : task
@@ -67,13 +69,14 @@ const Tasks = ({ subjectIdFilter }) => {
   };
 
   const handleDeleteTask = (id) => {
-    if (window.confirm("Are you sure you want to delete this task?")) {
-      setTasks(tasks.filter(task => task.id !== id));
-    }
+    showConfirm("Delete Task", "Are you sure you want to delete this task?", () => {
+      setTasks(prevTasks => prevTasks.filter(task => task.id !== id));
+      showAlert("Task deleted.", "info");
+    });
   };
 
   const handleToggleComplete = (id) => {
-    setTasks(tasks.map(task => 
+    setTasks(prevTasks => prevTasks.map(task => 
       task.id === id 
         ? { ...task, completed: !task.completed }
         : task
@@ -175,3 +178,8 @@ const Tasks = ({ subjectIdFilter }) => {
 };
 
 export default Tasks;
+
+
+
+
+

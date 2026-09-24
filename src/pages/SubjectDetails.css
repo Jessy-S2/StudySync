@@ -1,17 +1,17 @@
-.subject-details-page .page-header {
+﻿.subject-details-page .page-header {
   margin-bottom: 20px;
 }
 
 .subject-details-page .page-header h1 {
   margin: 0;
-  color: #ffffff;
+  color: #2D2438;
   font-size: 28px;
 }
 
 .details-tabs {
   display: flex;
   gap: 15px;
-  border-bottom: 2px solid #ecf0f1;
+  border-bottom: 2px solid #E6E4EF;
   margin-bottom: 30px;
 }
 
@@ -21,7 +21,7 @@
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 600;
-  color: #b0b0b0;
+  color: #6F6878;
   cursor: pointer;
   border-bottom: 3px solid transparent;
   margin-bottom: -2px; /* Pull over the border */
@@ -29,27 +29,35 @@
 }
 
 .tab-btn:hover {
-  color: #34495e;
+  color: #5B2DBB;
 }
 
 .tab-btn.active {
-  color: #3498db;
-  border-bottom-color: #3498db;
+  background-color: #5B2DBB;
+  color: #FFFFFF;
+  border-radius: 6px 6px 0 0;
 }
 
 .tab-content-container {
-  background: #1e1e1e;
-  padding: 30px;
+  
+  
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  border: 1px solid #333;
+  
+  
   min-height: 200px;
 }
 
 .tab-placeholder {
-  color: #b0b0b0;
+  color: #6F6878;
   font-style: italic;
   font-size: 15px;
   text-align: center;
   padding: 20px;
 }
+
+
+
+
+
+
+

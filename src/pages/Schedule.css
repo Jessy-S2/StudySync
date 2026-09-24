@@ -1,4 +1,4 @@
-.schedule-page .page-header {
+﻿.schedule-page .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -11,7 +11,7 @@
 
 .page-subtitle {
   margin: 5px 0 0 0;
-  color: #b0b0b0;
+  color: #6F6878;
   font-size: 15px;
 }
 
@@ -26,3 +26,5 @@
   flex-direction: column;
   gap: 15px;
 }
+
+

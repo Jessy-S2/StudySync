@@ -1,4 +1,4 @@
-.timer-controls {
+﻿.timer-controls {
   display: flex;
   justify-content: center;
   gap: 15px;
@@ -44,3 +44,4 @@
 .reset:hover {
   background-color: #c0392b;
 }
+

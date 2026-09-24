@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import './TaskCard.css';
 
 const TaskCard = ({ task, subjectName, onEdit, onDelete, onToggleComplete }) => {
@@ -17,8 +17,8 @@ const TaskCard = ({ task, subjectName, onEdit, onDelete, onToggleComplete }) => 
           <h3 className="task-card-title">{title}</h3>
         </div>
         <div className="task-card-actions">
-          <button className="icon-btn edit-btn" onClick={() => onEdit(task)}>Edit</button>
-          <button className="icon-btn delete-btn" onClick={() => onDelete(task.id)}>Delete</button>
+          <button type="button" className="icon-btn edit-btn" onClick={(e) => { e.stopPropagation(); onEdit(task); }}>Edit</button>
+          <button type="button" className="icon-btn delete-btn" onClick={(e) => { e.stopPropagation(); onDelete(task.id); }}>Delete</button>
         </div>
       </div>
       
@@ -36,3 +36,4 @@ const TaskCard = ({ task, subjectName, onEdit, onDelete, onToggleComplete }) => 
 };
 
 export default TaskCard;
+

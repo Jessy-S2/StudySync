@@ -1,7 +1,7 @@
-.app-header {
-  height: 70px;
-  background-color: #121212;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+﻿.app-header {
+  height: 80px;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #E6E4EF;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,26 +16,66 @@
 
 .search-icon {
   position: absolute;
-  left: 14px;
-  color: #a8a8a8;
+  left: 18px;
+  color: #686579;
 }
 
 .header-search input {
-  padding: 10px 16px 10px 40px;
-  background-color: #1e1e1e !important;
-  border: 1px solid rgba(255, 255, 255, 0.06) !important;
-  border-radius: 24px;
-  width: 280px;
-  color: #fff !important;
+  padding: 12px 20px 12px 48px;
+  background-color: #F0EEFC !important;
+  border: 1px solid transparent !important;
+  border-radius: 30px;
+  width: 380px;
+  color: #17143A !important;
   outline: none;
-  font-size: 14px;
+  font-size: 15px;
   transition: all 0.2s ease;
 }
 
+.header-search input::placeholder {
+  color: #686579;
+}
+
 .header-search input:focus {
-  border-color: #5B3A8E !important;
-  background-color: #242424 !important;
-  box-shadow: 0 0 0 2px rgba(91, 58, 142, 0.2);
+  border-color: #5B2DBB !important;
+  background-color: #FFFFFF !important;
+  box-shadow: 0 0 0 3px rgba(91, 45, 187, 0.1);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.header-notification {
+  background: none;
+  border: none;
+  color: #17143A;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.header-notification:hover {
+  background-color: #F5F1FF;
+}
+
+.notification-dot {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background-color: #e74c3c;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
 }
 
 .header-profile {
@@ -43,30 +83,35 @@
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  padding: 6px 16px 6px 6px;
+  padding: 6px 12px 6px 6px;
   border-radius: 30px;
-  background-color: #1e1e1e;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background-color: #FFFFFF;
+  border: 1px solid transparent;
   transition: all 0.2s ease;
 }
 
 .header-profile:hover {
-  background-color: #242424;
+  background-color: #F5F1FF;
 }
 
 .avatar {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #5B3A8E, #9b59b6);
+  background: #5B2DBB;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
 }
 
-.header-profile span {
-  font-weight: 500;
-  font-size: 14px;
-  color: #fff;
+.profile-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: #17143A;
 }
+
+.profile-chevron {
+  color: #686579;
+}
+

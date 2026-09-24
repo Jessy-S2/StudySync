@@ -11,20 +11,35 @@ import Tasks from './pages/Tasks';
 import Schedule from './pages/Schedule';
 import StudyTimer from './pages/StudyTimer';
 import Progress from './pages/Progress';
+import { UIProvider } from './context/UIContext';
 import './App.css';
 
 function App() {
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(() => {
+    const saved = localStorage.getItem('studysync_sidebar_collapsed');
+    return saved === 'true';
+  });
+
+  const toggleSidebar = () => {
+    setIsSidebarCollapsed(prev => {
+      const newState = !prev;
+      localStorage.setItem('studysync_sidebar_collapsed', newState);
+      return newState;
+    });
+  };
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/subjects/:subjectId/notes/:unitId/workspace/:fileId" element={<StudyWorkspace />} />
-        
-        <Route path="*" element={
-          <div className="app-container">
-            <Sidebar />
-            <main className="main-content">
-              <Header />
-              <div className="page-content">
+    <UIProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/subjects/:subjectId/notes/:unitId/workspace/:fileId" element={<StudyWorkspace />} />
+          
+          <Route path="*" element={
+            <div className={`app-container ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
+              <Sidebar isCollapsed={isSidebarCollapsed} toggleSidebar={toggleSidebar} />
+              <main className="main-content">
+                <Header />
+                <div className="page-content">
                 <Routes>
                   <Route path="/" element={<Navigate to="/dashboard" replace />} />
                   <Route path="/dashboard" element={<Dashboard />} />
@@ -42,6 +57,7 @@ function App() {
         } />
       </Routes>
     </BrowserRouter>
+  </UIProvider>
   );
 }
 

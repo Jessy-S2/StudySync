@@ -12,7 +12,7 @@
 }
 
 .modal-content {
-  background: #1e1e1e;
+  background: #FFFFFF;
   padding: 30px;
   border-radius: 8px;
   width: 100%;
@@ -22,7 +22,7 @@
 
 .modal-title {
   margin: 0 0 20px 0;
-  color: #ffffff;
+  color: #17143A;
   font-size: 22px;
 }
 
@@ -50,14 +50,14 @@
 
 .form-group label {
   font-size: 14px;
-  color: #b0b0b0;
+  color: #6F6878;
   font-weight: 500;
 }
 
 .form-group input,
 .form-group textarea {
   padding: 10px 12px;
-  border: 1px solid #333;
+  border: 1px solid #E6E4EF;
   border-radius: 6px;
   font-size: 15px;
   font-family: inherit;
@@ -67,7 +67,7 @@
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #3498db;
+  border-color: #5B2DBB;
 }
 
 .form-actions {
@@ -89,8 +89,8 @@
 }
 
 .btn-cancel {
-  background-color: #242424;
-  color: #b0b0b0;
+  background-color: #F8F5FC;
+  color: #6F6878;
 }
 
 .btn-cancel:hover {
@@ -98,11 +98,19 @@
 }
 
 .btn-submit {
-  background-color: #3498db;
-  color: #fff;
+  background-color: #5B2DBB;
+  color: #FFFFFF;
 }
 
 .btn-submit:hover {
-  background-color: #2980b9;
+  background-color: #4A209B;
 }
+
+
+
+
+
+
+
+
 

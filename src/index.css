@@ -2,7 +2,8 @@
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  background-color: #121212;
+  background-color: #FFFFFF;
+  color: #17143A;
 }
 
 #root {
@@ -17,14 +18,19 @@
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
+  color: #17143A;
 }
+
 input, textarea, select {
-  background-color: #141414 !important;
-  color: #fff !important;
-  border: 1px solid #333 !important;
+  background-color: #FFFFFF !important;
+  color: #17143A !important;
+  border: 1px solid #E6E4EF !important;
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: #3498db !important;
+  border-color: #5B2DBB !important;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(91, 45, 187, 0.2);
 }
+
 

@@ -1,4 +1,4 @@
-.unit-form .form-row {
+﻿.unit-form .form-row {
   display: flex;
   gap: 15px;
   align-items: flex-end;
@@ -15,8 +15,8 @@
 .file-input-label {
   display: inline-block;
   padding: 8px 16px;
-  background-color: #242424;
-  color: #ffffff;
+  background-color: #F8F5FC;
+  color: #17143A;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
@@ -42,15 +42,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #242424;
+  background-color: #F8F5FC;
   padding: 8px 12px;
   border-radius: 4px;
-  border: 1px solid #333;
+  border: 1px solid #E6E4EF;
   font-size: 14px;
 }
 
 .material-name {
-  color: #34495e;
+  color: #17143A;
   word-break: break-all;
   margin-right: 10px;
 }
@@ -71,7 +71,7 @@
 
 .upload-notice {
   font-size: 12px;
-  color: #b0b0b0;
+  color: #686579;
   margin-top: 10px;
   font-style: italic;
 }
@@ -85,7 +85,7 @@
 
 .tab-section-header h2 {
   margin: 0;
-  color: #ffffff;
+  color: #17143A;
   font-size: 20px;
 }
 
@@ -100,27 +100,27 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #1e1e1e;
-  border: 1px solid #333;
+  background-color: #FFFFFF;
+  border: 1px solid #E6E4EF;
   border-radius: 8px;
   box-shadow: 0 1px 4px rgba(0,0,0,0.02);
 }
 
 .unit-info h3 {
   margin: 0 0 5px 0;
-  color: #3498db;
+  color: #5B2DBB;
   font-size: 16px;
 }
 
 .unit-info h4 {
   margin: 0 0 10px 0;
-  color: #ffffff;
+  color: #17143A;
   font-size: 18px;
 }
 
 .unit-materials-count {
   margin: 0;
-  color: #b0b0b0;
+  color: #686579;
   font-size: 14px;
 }
 
@@ -136,6 +136,11 @@
 
 .clickable-unit-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  border-color: #3498db;
+  box-shadow: 0 4px 12px rgba(91, 45, 187, 0.1);
+  border-color: #5B2DBB;
 }
+
+
+
+
+

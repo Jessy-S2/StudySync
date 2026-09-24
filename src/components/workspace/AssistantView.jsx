@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { getChatHistory, saveChatHistory, clearChatHistory } from '../../utils/fileStorage';
 import { askAssistant } from '../../services/geminiService';
 import ReactMarkdown from 'react-markdown';
@@ -12,6 +12,7 @@ const AssistantView = ({ fileId, pdfBlob }) => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { showConfirm, showAlert } = useUI();
   const chatEndRef = useRef(null);
 
   useEffect(() => {
@@ -61,11 +62,12 @@ const AssistantView = ({ fileId, pdfBlob }) => {
   };
 
   const handleClear = async () => {
-    if (window.confirm("Are you sure you want to clear this conversation?")) {
+    showConfirm("Clear Conversation", "Are you sure you want to clear this conversation?", async () => {
       await clearChatHistory(fileId);
       setHistory([]);
       setError(null);
-    }
+      showAlert("Conversation cleared.", "info");
+    });
   };
 
   const handleKeyDown = (e) => {
@@ -235,3 +237,5 @@ const AssistantView = ({ fileId, pdfBlob }) => {
 };
 
 export default AssistantView;
+
+

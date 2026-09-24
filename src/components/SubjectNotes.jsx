@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getFilesBySubject, updateFileGenerationStatus, updateFileGeneratedData, getFile } from '../utils/fileStorage';
 import { generateStudyMaterial } from '../services/geminiService';
@@ -89,9 +89,9 @@ const SubjectNotes = ({ subjectId }) => {
   );
 
   return (
-    <div className="subject-notes">
+    <div className="subject-notes" >
       <div className="tab-section-header">
-        <h2>Notes</h2>
+        <h2 style={{ color: '#17143A', margin: '0 0 20px 0' }}>Notes</h2>
       </div>
 
       {unitsWithFiles.length === 0 ? (
@@ -104,9 +104,9 @@ const SubjectNotes = ({ subjectId }) => {
             const filesForUnit = subjectFiles.filter(f => f.unitId === unit.id);
             
             return (
-              <div key={unit.id} className="unit-notes-group" style={{ marginBottom: '20px', border: '1px solid #e0e0e0', borderRadius: '8px', padding: '15px', backgroundColor: '#ffffff' }}>
+              <div key={unit.id} className="unit-notes-group" style={{ marginBottom: '20px', border: '1px solid #E6E4EF', borderRadius: '8px', padding: '15px', backgroundColor: '#F7F8FC' }}>
                 <div style={{ marginBottom: '15px' }}>
-                  <h3 style={{ margin: 0, color: '#1e1e1e' }}>Unit {unit.unitNumber} - {unit.name}</h3>
+                  <h3 style={{ margin: 0, color: '#17143A' }}>Unit {unit.unitNumber} - {unit.name}</h3>
                 </div>
                 
                 <div className="unit-files-list" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -114,12 +114,12 @@ const SubjectNotes = ({ subjectId }) => {
                     const status = file.generationStatus || 'idle';
                     
                     return (
-                      <div key={file.fileId} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#f3f4f6', padding: '15px', borderRadius: '4px' }}>
+                      <div key={file.fileId} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#FFFFFF', padding: '15px', borderRadius: '4px' }}>
                         <div>
-                          <p style={{ margin: 0, fontWeight: '500', color: '#333333' }}>{file.name}</p>
+                          <p style={{ margin: 0, fontWeight: '500', color: '#17143A' }}>{file.name}</p>
                           
                           {status === 'generating' && (
-                            <p style={{ margin: '5px 0 0', fontSize: '14px', color: '#3498db' }}>
+                            <p style={{ margin: '5px 0 0', fontSize: '14px', color: '#5B2DBB' }}>
                               {progressStatus[file.fileId] || "Generating study material..."}
                             </p>
                           )}
@@ -178,3 +178,5 @@ const SubjectNotes = ({ subjectId }) => {
 };
 
 export default SubjectNotes;
+
+

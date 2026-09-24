@@ -1,8 +1,8 @@
-.study-session-card {
-  background: #1e1e1e;
+﻿.study-session-card {
+  background: #FFFFFF;
   padding: 12px 15px;
   border-radius: 8px;
-  border: 1px solid #333;
+  border: 1px solid #E6E4EF;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,20 +16,23 @@
 
 .session-subject {
   font-weight: 600;
-  color: #ffffff;
+  color: #2D2438;
   font-size: 15px;
 }
 
 .session-meta {
   font-size: 12px;
-  color: #b0b0b0;
+  color: #6F6878;
 }
 
 .session-card-duration {
   font-weight: 700;
-  color: #3498db;
+  color: #5B2DBB;
   font-size: 16px;
   background-color: rgba(52, 152, 219, 0.1);
   padding: 5px 10px;
   border-radius: 4px;
 }
+
+
+
