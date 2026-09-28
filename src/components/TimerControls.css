@@ -22,19 +22,19 @@
 }
 
 .start, .resume {
-  background-color: #2ecc71;
+  background-color: #5B2DBB;
   color: white;
 }
 .start:hover:not(:disabled), .resume:hover {
-  background-color: #27ae60;
+  background-color: #4A209B;
 }
 
 .pause {
-  background-color: #f1c40f;
+  background-color: #5B2DBB;
   color: white;
 }
 .pause:hover {
-  background-color: #f39c12;
+  background-color: #4A209B;
 }
 
 .reset {
@@ -44,4 +44,5 @@
 .reset:hover {
   background-color: #c0392b;
 }
+
 

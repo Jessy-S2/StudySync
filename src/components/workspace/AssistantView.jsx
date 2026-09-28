@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect, useRef } from 'react';
 import { getChatHistory, saveChatHistory, clearChatHistory } from '../../utils/fileStorage';
 import { askAssistant } from '../../services/geminiService';
+import { useUI } from '../../context/UIContext';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
@@ -237,5 +238,6 @@ const AssistantView = ({ fileId, pdfBlob }) => {
 };
 
 export default AssistantView;
+
 
 

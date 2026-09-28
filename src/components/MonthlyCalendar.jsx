@@ -5,12 +5,35 @@ import EventModal from './EventModal';
 import { useUI } from '../context/UIContext';
 
 export const EVENT_TYPE_COLORS = {
-  Exam: '#8B5CF6',
-  Assignment: '#3B82F6',
-  Project: '#F59E0B',
-  Presentation: '#EC4899',
-  Meeting: '#22C55E',
+  Exam: '#EF4444',
+  Assignment: '#14B8A6',
+  Project: '#EAB308',
+  Presentation: '#22C55E',
+  Meeting: '#3B82F6',
   Other: '#A855F7'
+};
+
+
+const getLuminance = (r, g, b) => {
+  const a = [r, g, b].map(v => {
+    v /= 255;
+    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  });
+  return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+};
+
+const hexToRgb = (hex) => {
+  let c = hex.substring(1);
+  if (c.length === 3) c = c.split('').map(x => x + x).join('');
+  return { r: parseInt(c.substring(0, 2), 16), g: parseInt(c.substring(2, 4), 16), b: parseInt(c.substring(4, 6), 16) };
+};
+
+const isDarkColor = (hex) => {
+  if (!hex || hex === 'transparent' || hex === 'none') return false;
+  try {
+    const rgb = hexToRgb(hex);
+    return getLuminance(rgb.r, rgb.g, rgb.b) < 0.179;
+  } catch (e) { return false; }
 };
 
 const MonthlyCalendar = ({ tasks, sessions, subjects }) => {
@@ -30,6 +53,9 @@ const MonthlyCalendar = ({ tasks, sessions, subjects }) => {
   const [eventToEdit, setEventToEdit] = useState(null);
 
   // Tooltip state
+  
+  
+
   const [hoveredDay, setHoveredDay] = useState(null);
   const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
 
@@ -269,16 +295,33 @@ const MonthlyCalendar = ({ tasks, sessions, subjects }) => {
         )}
       </div>
 
-      {view === 'monthly' ? (
-        <div className="calendar-grid">
+      
+        {view === 'monthly' ? (
+        <>
+          <div className="monthly-toolbar" style={{ display: 'flex', marginBottom: '15px' }}>
+            <div className="color-legend">
+              <span className="legend-title">Color Key:</span>
+              {Object.entries(EVENT_TYPE_COLORS).map(([name, color]) => {
+                const dark = isDarkColor(color);
+                return (
+                  <span 
+                    key={name} 
+                    className="legend-item" 
+                    style={{ backgroundColor: color, color: dark ? '#FFFFFF' : '#17143A' }} 
+                  >
+                    {name}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+          <div className="calendar-grid">
           <div className="cal-header">
             <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
           </div>
           <div className="cal-body">
             {renderCells()}
-          </div>
-        </div>
-      ) : (
+          </div></div></>) : (
         <YearOverview year={currentDate.getFullYear()} setYear={(y) => setCurrentDate(new Date(y, 0, 1))} />
       )}
 

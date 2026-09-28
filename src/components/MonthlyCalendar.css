@@ -319,3 +319,31 @@
 .cal-cell.today { background-color: #F3EEFA; }
 
 
+
+/* Color Legend */
+.color-legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.legend-title {
+  font-weight: 600;
+  color: #17143A;
+  margin-right: 5px;
+}
+
+.legend-item {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  user-select: none;
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: transform 0.1s;
+}
+
+.legend-item:hover {
+  transform: scale(1.05);
+}

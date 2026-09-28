@@ -1,0 +1,55 @@
+.floating-timer {
+  position: fixed;
+  background: #FFFFFF;
+  border-radius: 30px;
+  padding: 8px 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  border: 1px solid #E6E4EF;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 9999;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.floating-timer:active {
+  cursor: grabbing;
+}
+
+.ft-indicator {
+  font-size: 14px;
+}
+
+.ft-time {
+  font-size: 18px;
+  font-weight: 700;
+  color: #17143A;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+.ft-time:hover {
+  color: #5B2DBB;
+}
+
+.ft-controls button {
+  background: #F8F5FC;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #5B2DBB;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.ft-controls button:hover {
+  background: #5B2DBB;
+  color: #FFFFFF;
+}

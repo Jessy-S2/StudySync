@@ -1,4 +1,4 @@
-.app-container {
+﻿.app-container {
   display: flex;
   min-height: 100vh;
   width: 100%;
@@ -40,25 +40,17 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
+
+
+
+
+@media (max-width: 992px) {
   .app-container {
     flex-direction: column;
   }
   
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  
-  .sidebar-nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  
-  .main-content {
+  .main-content,
+  .app-container.sidebar-collapsed .main-content {
     margin-left: 0;
   }
 }
-

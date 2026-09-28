@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 const NotesView = ({ notes }) => {
   if (!notes || !notes.sections) {
@@ -7,7 +7,7 @@ const NotesView = ({ notes }) => {
 
   return (
     <div className="notes-view" style={{ width: '100%', maxWidth: '800px', margin: '0 auto', textAlign: 'left' }}>
-      <h2 style={{ borderBottom: '2px solid #3498db', paddingBottom: '10px', marginBottom: '20px' }}>
+      <h2 style={{ color: '#3498db', borderBottom: '2px solid #3498db', paddingBottom: '10px', marginBottom: '20px' }}>
         {notes.title || "Study Notes"}
       </h2>
       
@@ -26,3 +26,4 @@ const NotesView = ({ notes }) => {
 };
 
 export default NotesView;
+

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
@@ -12,6 +12,8 @@ import Schedule from './pages/Schedule';
 import StudyTimer from './pages/StudyTimer';
 import Progress from './pages/Progress';
 import { UIProvider } from './context/UIContext';
+import { TimerProvider } from './context/TimerContext';
+import FloatingTimer from './components/FloatingTimer';
 import './App.css';
 
 function App() {
@@ -30,6 +32,7 @@ function App() {
 
   return (
     <UIProvider>
+      <TimerProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/subjects/:subjectId/notes/:unitId/workspace/:fileId" element={<StudyWorkspace />} />
@@ -48,7 +51,7 @@ function App() {
                   <Route path="/subjects/:subjectId/units/:unitId" element={<UnitMaterials />} />
                   <Route path="/tasks" element={<Tasks />} />
                   <Route path="/schedule" element={<Schedule />} />
-                  <Route path="/study-timer" element={<StudyTimer />} />
+                  <Route path="/timer" element={<StudyTimer />} />
                   <Route path="/progress" element={<Progress />} />
                 </Routes>
               </div>
@@ -56,9 +59,13 @@ function App() {
           </div>
         } />
       </Routes>
-    </BrowserRouter>
+      <FloatingTimer />
+      </BrowserRouter>
+      </TimerProvider>
   </UIProvider>
   );
 }
 
 export default App;
+
+

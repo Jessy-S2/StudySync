@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
-import ScheduleCard from '../components/ScheduleCard';
 import ScheduleForm from '../components/ScheduleForm';
 import MonthlyCalendar from '../components/MonthlyCalendar';
+import WeeklyGrid from '../components/WeeklyGrid';
 import './Schedule.css';
 import { useUI } from '../context/UIContext';
 
@@ -153,9 +153,7 @@ const Schedule = () => {
           <h1>Schedule</h1>
           <p className="page-subtitle">Plan your study sessions and track events.</p>
         </div>
-        {activeTab === 'daily' && (
-          <button className="btn-primary" onClick={handleOpenForm}>+ Add Study Session</button>
-        )}
+        
       </div>
 
       <div className="details-tabs">
@@ -175,35 +173,9 @@ const Schedule = () => {
 
       <div className="tab-content-container" style={{ padding: activeTab === 'monthly' ? '30px' : '0', background: activeTab === 'monthly' ? '#FFFFFF' : 'transparent', border: activeTab === 'monthly' ? '1px solid #E6E4EF' : 'none', minHeight: 'auto' }}>
         
-        {activeTab === 'daily' && (
-          <>
-            <div className="schedule-filters">
-              <button className={`filter-btn ${filter === 'All' ? 'active' : ''}`} onClick={() => setFilter('All')}>All</button>
-              <button className={`filter-btn ${filter === 'Today' ? 'active' : ''}`} onClick={() => setFilter('Today')}>Today</button>
-              <button className={`filter-btn ${filter === 'Upcoming' ? 'active' : ''}`} onClick={() => setFilter('Upcoming')}>Upcoming</button>
-              <button className={`filter-btn ${filter === 'Completed' ? 'active' : ''}`} onClick={() => setFilter('Completed')}>Completed</button>
-            </div>
-            
-            {sortedSessions.length === 0 ? (
-              <div className="empty-state">
-                <p>No study sessions found.</p>
-              </div>
-            ) : (
-              <div className="schedule-list">
-                {sortedSessions.map(session => (
-                  <ScheduleCard 
-                    key={session.id} 
-                    session={session}
-                    subjectName={getSubjectName(session.subjectId)}
-                    onEdit={handleEditSession}
-                    onDelete={handleDeleteSession}
-                    onToggleComplete={handleToggleComplete}
-                  />
-                ))}
-              </div>
-            )}
-          </>
-        )}
+        {activeTab === 'daily' && <WeeklyGrid />}
+        
+        
 
         {activeTab === 'monthly' && (
           <MonthlyCalendar tasks={tasks} sessions={sessions} subjects={subjects} />
@@ -223,6 +195,7 @@ const Schedule = () => {
 };
 
 export default Schedule;
+
 
 
 

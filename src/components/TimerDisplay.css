@@ -13,7 +13,7 @@
 .timer-subject {
   margin: 0 0 5px 0;
   font-size: 20px;
-  color: #2D2438;
+  color: #17143A;
 }
 
 .timer-duration-info {
@@ -31,7 +31,7 @@
   justify-content: center;
   align-items: center;
   border: 8px solid #E6E4EF;
-  background-color: #2D2438;
+  background-color: #FFFFFF;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
   transition: border-color 0.3s;
 }
@@ -51,7 +51,7 @@
 .timer-time {
   font-size: 56px;
   font-weight: 700;
-  color: #2D2438;
+  color: #17143A;
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
@@ -64,6 +64,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
+
 
 
 

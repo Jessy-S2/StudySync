@@ -1,0 +1,196 @@
+<truncated 1 lines>
+  };
+
+  const hoursOptions = [];
+  for (let i = 0; i <= 23; i++) {
+    const ampm = i >= 12 ? 'PM' : 'AM';
+    let h = i % 12;
+    if (h === 0) h = 12;
+    hoursOptions.push(<option key={i} value={i}>{`${h}:00 ${ampm}`}</option>);
+  }
+
+  if (!isConfigured) {
+    return (
+      <div className="weekly-setup-container">
+        <div className="weekly-setup-card">
+          <h2>Create Your Daily Schedule</h2>
+          <p>Choose the hours you want your timetable to cover.</p>
+          <div className="setup-form">
+            <div className="form-group">
+              <label>From:</label>
+              <select value={startHour} onChange={(e) => setStartHour(parseInt(e.target.value, 10))}>{hoursOptions}</select>
+            </div>
+            <div className="form-group">
+              <label>To:</label>
+              <select value={endHour} onChange={(e) => setEndHour(parseInt(e.target.value, 10))}>{hoursOptions}</select>
+            </div>
+          </div>
+          <button className="btn-primary" onClick={handleCreate}>Create Schedule</button>
+        </div>
+      </div>
+    );
+  }
+
+  const skipCells = new Set();
+  const mergeHeads = new Map();
+  mergedCells.forEach(m => {
+    mergeHeads.set(`${m.r1}_${m.c1}`, m);
+    for (let r = m.r1; r <= m.r2; r++) {
+      for (let c = m.c1; c <= m.c2; c++) {
+        if (r !== m.r1 || c !== m.c1) skipCells.add(`${r}_${c}`);
+      }
+    }
+  });
+
+  return (
+    <div className="weekly-grid-wrapper">
+      <div className="weekly-controls">
+        <div className="weekly-range">
+          <label>Schedule Time:</label>
+          <div className="range-read-only">
+             {rowTimes.length > 0 ? `${minsToTimeStr(rowTimes[0])} to ${minsToTimeStr(rowTimes[rowTimes.length - 1])}` : 'No times'}
+          </div>
+        </div>
+        <button className="btn-primary" onClick={() => setIsConfirmNewOpen(true)}>New Schedule</button>
+      </div>
+
+      <div className="weekly-toolbar">
+        <div className="color-legend">
+          <span className="legend-title">Color Key:</span>
+          {colorKeys.map(k => {
+            const dark = isDarkColor(k.color);
+            return (
+              <span 
+                key={k.id} 
+                className="legend-item" 
+                style={{ backgroundColor: k.color, color: dark ? '#FFFFFF' : '#17143A' }} 
+                onClick={() => applyColor(k.color)}
+                title="Click to apply color"
+              >
+                {k.name}
+                <button 
+                  className="color-key-remove"
+                  onClick={(e) => { e.stopPropagation(); removeColorKey(k.id); }}
+                  title="Remove color key"
+                >&times;</button></span>
+            );
+          })}
+          <button className="btn-small" onClick={() => setIsColorModalOpen(true)}>+ Add Color Key</button>
+        </div>
+
+        <div className="cell-actions">
+          <button className="btn-small" onClick={handleMerge}>Merge Cells</button>
+          <button className="btn-small" onClick={handleUnmerge}>Unmerge Cells</button>
+        </div>
+      </div>
+
+      {isConfirmNewOpen && (
+        <div className="ui-modal-overlay">
+          <div className="ui-modal-content" style={{ zIndex: 999 }}>
+            <h3 className="ui-modal-title">Are you sure?</h3>
+            <p className="ui-modal-message">The current schedule will be deleted and cannot be recovered.</p>
+            <div className="ui-modal-actions">
+              <button className="ui-btn-cancel" onClick={() => setIsConfirmNewOpen(false)}>Cancel</button>
+              <button className="ui-btn-confirm" onClick={handleConfirmNewSchedule} style={{ backgroundColor: '#e74c3c' }}>Create New Schedule</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isColorModalOpen && (
+        <div className="color-modal">
+          <div className="color-modal-content">
+            <h3>Add Color Key</h3>
+            <div className="form-group">
+              <label>Color:</label>
+              <input type="color" value={newColor} onChange={e => setNewColor(e.target.value)} />
+            </div>
+            <div className="form-group">
+              <label>Name:</label>
+              <input type="text" value={newColorName} onChange={e => setNewColorName(e.target.value)} placeholder="e.g. Study" />
+            </div>
+            <div className="modal-actions">
+              <button className="btn-secondary" onClick={() => setIsColorModalOpen(false)}>Cancel</button>
+              <button className="btn-primary" onClick={addColorKey}>Save</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="table-responsive">
+        <table className="weekly-table">
+          <thead>
+            <tr>
+              <th className="time-header" style={{ width: colWidths[-1] || 80, minWidth: colWidths[-1] || 80 }}>
+                <div className="col-resizer" onMouseDown={(e) => startResizing(e, 'col', -1)} />
+              </th>
+              {DAYS.map((day, c) => (
+                <th key={day} style={{ width: colWidths[c] || 120, minWidth: colWidths[c] || 120 }}>
+                  {day}
+                  <div className="col-resizer" onMouseDown={(e) => startResizing(e, 'col', c)} />
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rowTimes.map((timeMins, r) => (
+              <tr key={r} style={{ height: rowHeights[r] || 80 }}>
+                <td className="time-col" style={{ position: 'relative' }}>
+                  <input 
+                    type="text" 
+                    className="time-edit-input"
+                    defaultValue={minsToTimeStr(timeMins)} 
+                    onBlur={(e) => handleTimeEdit(r, e.target.value)}
+                    key={`time_${r}_${timeMins}`}
+                  />
+                  <div className="row-resizer" onMouseDown={(e) => startResizing(e, 'row', r)} />
+                </td>
+                
+                {DAYS.map((day, c) => {
+                  const key = `${r}_${c}`;
+                  if (skipCells.has(key)) return null;
+
+                  const mergeObj = mergeHeads.get(key);
+                  const rowSpan = mergeObj ? (mergeObj.r2 - mergeObj.r1 + 1) : 1;
+                  const colSpan = mergeObj ? (mergeObj.c2 - mergeObj.c1 + 1) : 1;
+
+                  const isSelected = selection && 
+                    r >= Math.min(selection.r1, selection.r2) && r <= Math.max(selection.r1, selection.r2) &&
+                    c >= Math.min(selection.c1, selection.c2) && c <= Math.max(selection.c1, selection.c2);
+
+                  let cellColor = cellColors[`${c}_${r}`] || 'transparent';
+                  if (cellColor !== 'transparent' && !cellColor.startsWith('#')) {
+                    const legacyKey = colorKeys.find(k => k.id === cellColor);
+                    cellColor = legacyKey ? legacyKey.color : 'transparent';
+                  }
+                  const isDark = isDarkColor(cellColor);
+
+                  return (
+                    <td 
+                      key={c}
+                      rowSpan={rowSpan}
+                      colSpan={colSpan}
+                      className={`grid-cell ${isSelected ? 'selected' : ''}`}
+                      style={{ backgroundColor: cellColor }}
+                      onMouseDown={() => handleMouseDownCell(r, c)}
+                      onMouseEnter={(e) => handleMouseEnterCell(e, r, c)}
+                    >
+                      <textarea 
+                        value={gridData[`${c}_${r}`] || ''}
+                        onChange={(e) => setGridData(prev => ({ ...prev, [`${c}_${r}`]: e.target.value }))}
+                        placeholder=""
+                        style={{ color: isDark ? '#FFFFFF' : '#17143A' }}
+                      />
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default WeeklyGrid;

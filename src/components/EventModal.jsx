@@ -47,10 +47,7 @@ const EventModal = ({ onSave, onDelete, onClose, defaultDate, eventToEdit }) => 
               <input type="date" value={date} onChange={e => setDate(e.target.value)} />
             </div>
 
-            <div className="form-group">
-              <label>Time (Optional)</label>
-              <input type="time" value={time} onChange={e => setTime(e.target.value)} />
-            </div>
+
 
             <div className="form-group">
               <label>Event Type</label>
