@@ -294,16 +294,7 @@
   background: #F8F5FC;
 }
 
-@media (max-width: 768px) {
-  .cal-cell {
-    min-height: 80px;
-    padding: 4px;
-  }
-  .cal-item {
-    font-size: 9px;
-    padding: 2px 4px;
-  }
-}
+
 
 .cal-cell.selected { background-color: #F8F5FC; box-shadow: inset 0 0 0 1px #7C4DFF; }
 
@@ -346,4 +337,23 @@
 
 .legend-item:hover {
   transform: scale(1.05);
+}
+
+/* Add responsive wrappers */
+.monthly-schedule-container {
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.calendar-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 15px; /* Ensure tooltip or scrollbar doesn't clip */
+}
+
+.calendar-responsive .calendar-grid {
+  min-width: 750px; /* Keep it wide and readable like desktop */
 }

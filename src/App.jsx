@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
@@ -11,12 +11,16 @@ import Tasks from './pages/Tasks';
 import Schedule from './pages/Schedule';
 import StudyTimer from './pages/StudyTimer';
 import Progress from './pages/Progress';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import { UIProvider } from './context/UIContext';
 import { TimerProvider } from './context/TimerContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import FloatingTimer from './components/FloatingTimer';
 import './App.css';
 
-function App() {
+function AppContent() {
+  const { currentUser } = useAuth();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(() => {
     const saved = localStorage.getItem('studysync_sidebar_collapsed');
     return saved === 'true';
@@ -30,11 +34,22 @@ function App() {
     });
   };
 
+  if (!currentUser) {
+    return (
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    );
+  }
+
   return (
     <UIProvider>
       <TimerProvider>
-      <BrowserRouter>
         <Routes>
+          <Route path="/login" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/register" element={<Navigate to="/dashboard" replace />} />
           <Route path="/subjects/:subjectId/notes/:unitId/workspace/:fileId" element={<StudyWorkspace />} />
           
           <Route path="*" element={
@@ -43,29 +58,36 @@ function App() {
               <main className="main-content">
                 <Header />
                 <div className="page-content">
-                <Routes>
-                  <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/subjects" element={<Subjects />} />
-                  <Route path="/subjects/:subjectId" element={<SubjectDetails />} />
-                  <Route path="/subjects/:subjectId/units/:unitId" element={<UnitMaterials />} />
-                  <Route path="/tasks" element={<Tasks />} />
-                  <Route path="/schedule" element={<Schedule />} />
-                  <Route path="/timer" element={<StudyTimer />} />
-                  <Route path="/progress" element={<Progress />} />
-                </Routes>
-              </div>
-            </main>
-          </div>
-        } />
-      </Routes>
-      <FloatingTimer />
-      </BrowserRouter>
+                  <Routes>
+                    <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/subjects" element={<Subjects />} />
+                    <Route path="/subjects/:subjectId" element={<SubjectDetails />} />
+                    <Route path="/subjects/:subjectId/units/:unitId" element={<UnitMaterials />} />
+                    <Route path="/tasks" element={<Tasks />} />
+                    <Route path="/schedule" element={<Schedule />} />
+                    <Route path="/timer" element={<StudyTimer />} />
+                    <Route path="/progress" element={<Progress />} />
+                  </Routes>
+                </div>
+              </main>
+            </div>
+          } />
+        </Routes>
+        <FloatingTimer />
       </TimerProvider>
-  </UIProvider>
+    </UIProvider>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
 export default App;
-
-

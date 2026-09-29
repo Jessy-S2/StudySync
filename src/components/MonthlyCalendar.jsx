@@ -315,13 +315,14 @@ const MonthlyCalendar = ({ tasks, sessions, subjects }) => {
               })}
             </div>
           </div>
-          <div className="calendar-grid">
+          <div className="calendar-responsive">
+<div className="calendar-grid">
           <div className="cal-header">
             <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
           </div>
           <div className="cal-body">
             {renderCells()}
-          </div></div></>) : (
+          </div></div></div></>) : (
         <YearOverview year={currentDate.getFullYear()} setYear={(y) => setCurrentDate(new Date(y, 0, 1))} />
       )}
 

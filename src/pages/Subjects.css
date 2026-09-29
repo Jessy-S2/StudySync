@@ -36,3 +36,9 @@
 
 
 
+
+@media (max-width: 768px) {
+  .subjects-grid {
+    grid-template-columns: 1fr;
+  }
+}

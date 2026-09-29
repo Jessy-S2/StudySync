@@ -46,3 +46,12 @@
 
 
 
+
+@media (max-width: 768px) {
+  .tasks-grid {
+    grid-template-columns: 1fr;
+  }
+  .tasks-filters {
+    flex-wrap: wrap;
+  }
+}

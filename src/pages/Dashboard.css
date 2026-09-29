@@ -418,3 +418,22 @@
 
 
 
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 15px;
+  }
+  .dashboard-hero {
+    padding: 20px;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+  .hero-decoration {
+    display: none;
+  }
+  .hero-content h1 {
+    font-size: 24px;
+    justify-content: center;
+  }
+}

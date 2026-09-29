@@ -1,0 +1,141 @@
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F7F8FC;
+  padding: 20px;
+}
+
+.auth-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #E6E4EF;
+}
+
+.auth-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  background-color: #5B2DBB;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 12px rgba(91, 45, 187, 0.2);
+}
+
+.auth-brand h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #17143A;
+  letter-spacing: -0.5px;
+}
+
+.auth-card h2 {
+  font-size: 20px;
+  color: #17143A;
+  margin: 0 0 5px 0;
+  text-align: center;
+}
+
+.auth-subtitle {
+  color: #6F6878;
+  font-size: 14px;
+  margin: 0 0 25px 0;
+  text-align: center;
+}
+
+.auth-error {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-form label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2D2438;
+}
+
+.auth-form input {
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid #E6E4EF;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.auth-form input:focus {
+  border-color: #5B2DBB;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(91, 45, 187, 0.1);
+}
+
+.auth-submit {
+  margin-top: 10px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.auth-footer {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 14px;
+  color: #6F6878;
+}
+
+.auth-footer a {
+  color: #5B2DBB;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 30px 20px;
+  }
+}
+
+.field-error {
+  color: #B91C1C;
+  font-size: 12px;
+  margin-top: -2px;
+}
+
+.input-error {
+  border-color: #B91C1C !important;
+}

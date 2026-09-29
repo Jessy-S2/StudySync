@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css';
 
 const Dashboard = () => {
+  const { currentUser } = useAuth();
   const navigate = useNavigate();
 
   const [subjects, setSubjects] = useState(() => {
@@ -75,7 +77,7 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <div className="dashboard-hero">
         <div className="hero-content">
-          <h1>Welcome back, Student! <span className="wave">👋</span></h1>
+          <h1>Welcome back, {currentUser?.name || 'Student'}! <span className="wave">👋</span></h1>
           <p>Small steps today lead to big achievements tomorrow.<br/>Keep going! You're doing great!</p>
         </div>
         <div className="hero-decoration">
