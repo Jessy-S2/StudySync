@@ -8,9 +8,7 @@
 }
 
 .dashboard-hero {
-  background: linear-gradient(135deg, #F5F1FF, #E8F4FF);
-  border-radius: 20px;
-  padding: 40px;
+  padding: 10px 0 30px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,14 +30,6 @@
   font-size: 16px;
   line-height: 1.5;
   margin: 0;
-}
-
-.hero-decoration {
-  position: absolute;
-  right: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0.8;
 }
 
 .dashboard-stats-row {
@@ -73,7 +63,7 @@
   height: 24px;
 }
 
-.stat-icon-wrapper.purple { background: #EDE7FF; color: #5B2DBB; }
+.stat-icon-wrapper.purple { background: #EDE7FF; color: var(--primary-color, #5B2DBB); }
 .stat-icon-wrapper.blue { background: #E8F4FF; color: #2563EB; }
 .stat-icon-wrapper.orange { background: #FFF3E3; color: #EA580C; }
 .stat-icon-wrapper.green { background: #E8FAF0; color: #16A34A; }
@@ -124,7 +114,7 @@
 .view-all-btn {
   background: none;
   border: none;
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
   font-weight: 600;
   font-size: 14px;
   cursor: pointer;
@@ -152,7 +142,7 @@
 .dash-subject-icon {
   width: 48px;
   height: 48px;
-  background: #5B2DBB;
+  background: var(--primary-color, #5B2DBB);
   color: #FFF;
   border-radius: 12px;
   display: flex;
@@ -189,14 +179,14 @@
 
 .dash-progress-fill {
   height: 100%;
-  background: #5B2DBB;
+  background: var(--primary-color, #5B2DBB);
   border-radius: 3px;
 }
 
 .dash-progress-text {
   font-size: 12px;
   font-weight: 600;
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
 }
 
 .dash-subject-arrow {
@@ -208,7 +198,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   cursor: pointer;
 }
@@ -237,7 +227,7 @@
 
 .priority-high { background: #e74c3c; }
 .priority-medium { background: #f39c12; }
-.priority-low { background: #5B2DBB; }
+.priority-low { background: var(--primary-color, #5B2DBB); }
 
 .dash-task-icon {
   width: 40px;
@@ -337,7 +327,7 @@
 }
 
 .mini-cal-cell.today {
-  background: #5B2DBB;
+  background: var(--primary-color, #5B2DBB);
   color: #FFF;
 }
 
@@ -367,7 +357,7 @@
 
 .qa-btn:hover {
   background: #F8F5FC;
-  border-color: #5B2DBB;
+  border-color: var(--primary-color, #5B2DBB);
 }
 
 .qa-icon {
@@ -383,22 +373,6 @@
   font-size: 13px;
   font-weight: 500;
   color: #17143A;
-}
-
-.motivation-widget {
-  padding: 30px;
-  text-align: center;
-}
-
-.motivation-widget h3 {
-  font-size: 20px;
-  margin-bottom: 8px;
-}
-
-.motivation-widget p {
-  color: #686579;
-  font-size: 14px;
-  margin: 0;
 }
 
 @media (max-width: 1024px) {
@@ -424,13 +398,10 @@
     padding: 15px;
   }
   .dashboard-hero {
-    padding: 20px;
+    padding: 10px 0 20px 0;
     flex-direction: column;
     text-align: center;
     gap: 20px;
-  }
-  .hero-decoration {
-    display: none;
   }
   .hero-content h1 {
     font-size: 24px;

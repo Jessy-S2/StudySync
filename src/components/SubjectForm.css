@@ -67,7 +67,7 @@
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-color: #5B2DBB;
+  border-color: var(--primary-color, #5B2DBB);
 }
 
 .form-actions {
@@ -98,7 +98,7 @@
 }
 
 .btn-submit {
-  background-color: #5B2DBB;
+  background-color: var(--primary-color, #5B2DBB);
   color: #FFFFFF;
 }
 

@@ -74,16 +74,16 @@ const FloatingTimer = () => {
       onPointerCancel={handlePointerUp}
     >
       <div className="ft-indicator">
-        {status === 'Studying' ? '🟢' : '⏸'}
+        {status === 'Studying' ? (<svg viewBox="0 0 24 24" width="12" height="12" fill="#10B981"><circle cx="12" cy="12" r="10"/></svg>) : (<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>)}
       </div>
       <div className="ft-time" onClick={() => navigate('/timer')} title="Open Timer">
         {formatTime(timeLeft)}
       </div>
       <div className="ft-controls">
         {status === 'Studying' ? (
-          <button onClick={handlePause} title="Pause">⏸</button>
+          <button onClick={handlePause} title="Pause"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg></button>
         ) : (
-          <button onClick={handleResume} title="Resume">▶️</button>
+          <button onClick={handleResume} title="Resume"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg></button>
         )}
       </div>
     </div>

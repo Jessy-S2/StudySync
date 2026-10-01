@@ -14,16 +14,23 @@ import Progress from './pages/Progress';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { UIProvider } from './context/UIContext';
+import { SettingsProvider, useSettings } from './context/SettingsContext';
+import Settings from './pages/Settings';
 import { TimerProvider } from './context/TimerContext';
+import { NotificationProvider } from './context/NotificationContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import FloatingTimer from './components/FloatingTimer';
 import './App.css';
 
 function AppContent() {
   const { currentUser } = useAuth();
+  const { settings } = useSettings();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(() => {
-    const saved = localStorage.getItem('studysync_sidebar_collapsed');
-    return saved === 'true';
+    if (settings?.appearance?.rememberSidebar) {
+      const saved = localStorage.getItem('studysync_sidebar_collapsed');
+      return saved === 'true';
+    }
+    return false;
   });
 
   const toggleSidebar = () => {
@@ -46,7 +53,8 @@ function AppContent() {
 
   return (
     <UIProvider>
-      <TimerProvider>
+      <NotificationProvider>
+        <TimerProvider>
         <Routes>
           <Route path="/login" element={<Navigate to="/dashboard" replace />} />
           <Route path="/register" element={<Navigate to="/dashboard" replace />} />
@@ -68,6 +76,7 @@ function AppContent() {
                     <Route path="/schedule" element={<Schedule />} />
                     <Route path="/timer" element={<StudyTimer />} />
                     <Route path="/progress" element={<Progress />} />
+                    <Route path="/settings" element={<Settings />} />
                   </Routes>
                 </div>
               </main>
@@ -76,6 +85,7 @@ function AppContent() {
         </Routes>
         <FloatingTimer />
       </TimerProvider>
+      </NotificationProvider>
     </UIProvider>
   );
 }
@@ -84,8 +94,10 @@ function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <SettingsProvider>
         <AppContent />
-      </AuthProvider>
+      </SettingsProvider>
+        </AuthProvider>
     </BrowserRouter>
   );
 }

@@ -1,5 +1,7 @@
 ﻿import React, { createContext, useState, useContext, useEffect, useRef, useCallback } from 'react';
 import { useUI } from './UIContext';
+import { useSettings } from './SettingsContext';
+import { useNotification } from './NotificationContext';
 import './TimerContext.css';
 
 const TimerContext = createContext();
@@ -12,6 +14,7 @@ export const useTimer = () => {
 
 export const TimerProvider = ({ children }) => {
   const { showConfirm, showAlert } = useUI();
+  const { addNotification } = useNotification();
   
   const [subjects, setSubjects] = useState(() => {
     const saved = localStorage.getItem('studysync_subjects');
@@ -25,20 +28,25 @@ export const TimerProvider = ({ children }) => {
 
   const [selectedSubjectId, setSelectedSubjectId] = useState('');
   const [customSubjectName, setCustomSubjectName] = useState('');
-  const [selectedDuration, setSelectedDuration] = useState(25);
+  const { settings } = useSettings();
+  const [selectedDuration, setSelectedDuration] = useState(settings?.study?.defaultStudyDuration || 25);
   const [customDuration, setCustomDuration] = useState('');
+  useEffect(() => {
+    if (status === 'Idle') {
+      setSelectedDuration(settings.study.defaultStudyDuration);
+      setTimeLeft(settings.study.defaultStudyDuration * 60);
+    }
+  }, [settings.study.defaultStudyDuration]);
   
   const [status, setStatus] = useState('Idle');
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   
   const endTimeRef = useRef(null);
-  const stateRef = useRef({ selectedSubjectId, selectedDuration, customSubjectName });
+  const stateRef = useRef({ selectedSubjectId, selectedDuration, customSubjectName, settings });
   
   const [showPopup, setShowPopup] = useState(false);
 
-  useEffect(() => {
-    stateRef.current = { selectedSubjectId, selectedDuration, customSubjectName };
-  }, [selectedSubjectId, selectedDuration, customSubjectName]);
+  useEffect(() => { stateRef.current = { selectedSubjectId, selectedDuration, customSubjectName, settings }; }, [selectedSubjectId, selectedDuration, customSubjectName, settings]);
 
   useEffect(() => {
     localStorage.setItem('studysync_study_sessions', JSON.stringify(completedSessions));
@@ -79,6 +87,17 @@ export const TimerProvider = ({ children }) => {
     
     setCompletedSessions(prev => [newSession, ...prev]);
     setShowPopup(true);
+    
+    const { settings: currentSettings } = stateRef.current;
+    if (currentSettings?.notifications?.timerCompletion) {
+      addNotification({
+        id: `timer-complete-${newSession.id}`,
+        type: 'timer',
+        title: 'Study Session Complete',
+        message: `Your ${newSession.duration}-minute study session has completed.`,
+        route: '/timer'
+      });
+    }
     
     // Auto-reset
     endTimeRef.current = null;
@@ -192,7 +211,7 @@ export const TimerProvider = ({ children }) => {
       {showPopup && (
         <div className="timer-popup-overlay">
           <div className="timer-popup-content">
-            <div className="timer-popup-icon">ðŸŽ‰</div>
+            
             <h2>Study Session Complete!</h2>
             <p>Your study timer has finished.</p>
             <button className="btn-primary" onClick={closePopup}>OK</button>

@@ -4,11 +4,13 @@ import MonthlyCalendar from '../components/MonthlyCalendar';
 import WeeklyGrid from '../components/WeeklyGrid';
 import './Schedule.css';
 import { useUI } from '../context/UIContext';
+import { useSettings } from '../context/SettingsContext';
 
 const Schedule = () => {
+  const { settings } = useSettings();
   const [activeTab, setActiveTab] = useState(() => {
     const saved = localStorage.getItem('studysync_schedule_view');
-    return saved === 'monthly' ? 'monthly' : 'daily';
+    return saved ? saved : (settings?.study?.defaultScheduleView || 'daily');
   });
 
   useEffect(() => {

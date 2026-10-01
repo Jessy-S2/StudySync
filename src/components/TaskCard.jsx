@@ -25,7 +25,7 @@ const TaskCard = ({ task, subjectName, onEdit, onDelete, onToggleComplete }) => 
       {description && <p className="task-card-description">{description}</p>}
       
       <div className="task-card-details">
-        <span className="task-subject">{subjectName || 'Unknown Subject'}</span>
+        {subjectName ? <span className="task-subject">{subjectName}</span> : null}
         <span className="task-due-date">Due: {dueDate}</span>
         <span className={`task-priority priority-${priority.toLowerCase()}`}>
           {priority}

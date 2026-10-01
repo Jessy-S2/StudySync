@@ -29,11 +29,11 @@
 }
 
 .tab-btn:hover {
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
 }
 
 .tab-btn.active {
-  background-color: #5B2DBB;
+  background-color: var(--primary-color, #5B2DBB);
   color: #FFFFFF;
   border-radius: 6px 6px 0 0;
 }

@@ -1,7 +1,8 @@
-﻿.app-container {
+.app-container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
+  overflow: hidden;
 }
 
 .main-content {
@@ -10,7 +11,8 @@
   display: flex;
   flex-direction: column;
   background-color: #F7F8FC;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
   transition: margin-left 0.3s ease;
 }
 
@@ -39,11 +41,6 @@
 * {
   box-sizing: border-box;
 }
-
-
-
-
-
 
 @media (max-width: 1024px) {
   .main-content {

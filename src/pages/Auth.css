@@ -29,7 +29,7 @@
   align-items: center;
   justify-content: center;
   color: #FFFFFF;
-  background-color: #5B2DBB;
+  background-color: var(--primary-color, #5B2DBB);
   width: 48px;
   height: 48px;
   border-radius: 12px;
@@ -95,7 +95,7 @@
 }
 
 .auth-form input:focus {
-  border-color: #5B2DBB;
+  border-color: var(--primary-color, #5B2DBB);
   outline: none;
   box-shadow: 0 0 0 2px rgba(91, 45, 187, 0.1);
 }
@@ -115,7 +115,7 @@
 }
 
 .auth-footer a {
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
   font-weight: 600;
   text-decoration: none;
 }

@@ -89,8 +89,9 @@ const Tasks = ({ subjectIdFilter }) => {
   };
 
   const getSubjectName = (subjectId) => {
+    if (!subjectId) return '';
     const subject = subjects.find(s => s.id === subjectId);
-    return subject ? subject.name : 'Unknown Subject';
+    return subject ? subject.name : subjectId;
   };
 
   // Filter and Sort

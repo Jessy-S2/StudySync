@@ -28,9 +28,20 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-  border-color: #5B2DBB !important;
+  border-color: var(--primary-color, #5B2DBB) !important;
   outline: none;
   box-shadow: 0 0 0 2px rgba(91, 45, 187, 0.2);
 }
 
 
+
+body.theme-dark {
+  background-color: #111;
+  filter: invert(1) hue-rotate(180deg);
+}
+
+body.theme-dark img, 
+body.theme-dark .avatar,
+body.theme-dark .settings-color {
+  filter: invert(1) hue-rotate(180deg);
+}

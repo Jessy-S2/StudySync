@@ -104,7 +104,7 @@
   padding: 14px 20px;
   box-shadow: 0 4px 20px rgba(91, 45, 187, 0.1);
   border: 1px solid #E6E4EF;
-  border-left: 4px solid #5B2DBB;
+  border-left: 4px solid var(--primary-color, #5B2DBB);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -126,7 +126,7 @@
 }
 
 .ui-toast-icon {
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
   font-size: 18px;
   font-weight: bold;
 }

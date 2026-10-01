@@ -98,7 +98,7 @@
 }
 
 .preset-btn.active {
-  background-color: #5B2DBB;
+  background-color: var(--primary-color, #5B2DBB);
   color: white;
 }
 

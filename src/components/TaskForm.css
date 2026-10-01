@@ -26,7 +26,7 @@
 }
 
 .form-group select:focus {
-  border-color: #5B2DBB;
+  border-color: var(--primary-color, #5B2DBB);
 }
 
 

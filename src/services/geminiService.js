@@ -24,7 +24,7 @@ const blobToBase64 = (blob) => {
   });
 };
 
-export const generateStudyMaterial = async (pdfBlob, onProgress) => {
+export const generateStudyMaterial = async (pdfBlob, onProgress, aiPrefs = {}) => {
   try {
     if (!pdfBlob) {
       throw new Error("No PDF file provided.");
@@ -33,10 +33,11 @@ export const generateStudyMaterial = async (pdfBlob, onProgress) => {
     onProgress("Preparing PDF for analysis...");
     const base64Data = await blobToBase64(pdfBlob);
     
-    // Scale quiz/flashcards dynamically based on file size
-    const isLargePDF = pdfBlob.size > 1024 * 1024 * 2; // > 2MB
-    const isMediumPDF = pdfBlob.size > 1024 * 512; // > 500KB
-    const expectedCount = isLargePDF ? 15 : (isMediumPDF ? 10 : 5);
+    // Scale quiz/flashcards dynamically based on settings or file size
+    const isLargePDF = pdfBlob.size > 1024 * 1024 * 2;
+    const isMediumPDF = pdfBlob.size > 1024 * 512;
+    const expectedQuizCount = aiPrefs.numQuestions || (isLargePDF ? 15 : (isMediumPDF ? 10 : 5));
+    const expectedFlashcardCount = aiPrefs.numFlashcards || (isLargePDF ? 15 : (isMediumPDF ? 10 : 5));
     
     onProgress("Sending material to Gemini...");
     
@@ -48,14 +49,13 @@ export const generateStudyMaterial = async (pdfBlob, onProgress) => {
 
 REQUIREMENTS:
 1. "notes": Comprehensive and structured study notes.
-   - Capture important concepts, relationships, and definitions.
-   - Preserve important formulas and equations (use readable mathematical notation/LaTeX where appropriate).
-   - Explain important diagrams, flowcharts, graphs, charts, and tables (e.g., "Figure: Data preprocessing pipeline â€” shows the sequence from data cleaning â†’ transformation..."). Do not attempt to reproduce the image itself; provide a concise explanation of what it shows and why it matters.
-   - Include relevant examples.
-   - Distinguish important definitions from supporting information.
-   - Produce useful, detailed study notes rather than an extremely short summary. Do not summarize away important content.
-2. "quiz": Generate exactly ${expectedCount} multiple choice questions focusing on concepts and problem-solving.
-3. "flashcards": Generate exactly ${expectedCount} flashcards covering key definitions, terminology, and facts.`;
+   - Verbosity: ${aiPrefs.notesLength || 'medium'}
+   - Focus: ${aiPrefs.examOriented ? 'Highly exam-oriented, highlighting critical exam topics.' : 'General knowledge gathering.'}
+   ${aiPrefs.includeFormulas ? '- Preserve important formulas and equations (use readable mathematical notation/LaTeX where appropriate).' : ''}
+   ${aiPrefs.includeExamples ? '- Include relevant examples to aid understanding.' : ''}
+   - Explain important diagrams, flowcharts, graphs, charts, and tables concisely.
+2. "quiz": Generate exactly ${expectedQuizCount} multiple choice questions focusing on concepts and problem-solving. Target difficulty: ${aiPrefs.quizDifficulty || 'mixed'}.
+3. "flashcards": Generate exactly ${expectedFlashcardCount} flashcards covering key definitions, terminology, and facts.`;
 
     const userPrompt = `Generate the study package for this document.`;
 

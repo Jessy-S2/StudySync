@@ -10,7 +10,7 @@
 }
 
 .btn-primary {
-  background-color: #5B2DBB;
+  background-color: var(--primary-color, #5B2DBB);
   color: #FFFFFF;
   border: none;
   padding: 10px 20px;

@@ -21,7 +21,8 @@ const USER_SPECIFIC_KEYS = [
   'studysync_weekly_grid_configured',
   'studysync_weekly_grid_colwidths',
   'studysync_weekly_grid_colorkeys',
-  'studysync_v3_migrated'
+  'studysync_v3_migrated',
+  'studysync_settings'
 ];
 
 // We also have dynamic keys like studysync_workspace_tab_${fileId}. 
@@ -158,12 +159,29 @@ export const AuthProvider = ({ children }) => {
     return { success: true };
   };
 
+  const changePassword = (currentPassword, newPassword) => {
+    if (currentUser.password !== currentPassword) {
+      return { success: false, error: 'Incorrect current password' };
+    }
+    const updatedUsers = users.map(u => u.id === currentUser.id ? { ...u, password: newPassword } : u);
+    setUsers(updatedUsers);
+    setCurrentUser({ ...currentUser, password: newPassword });
+    return { success: true };
+  };
+
+  const deleteAccount = () => {
+    // Note: local user data handled by settings clear data functions
+    const updatedUsers = users.filter(u => u.id !== currentUser.id);
+    setUsers(updatedUsers);
+    setCurrentUser(null);
+  };
+
   const logout = () => {
     setCurrentUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, register, logout, isAuthenticated: !!currentUser }}>
+    <AuthContext.Provider value={{ currentUser, login, register, logout, changePassword, deleteAccount, isAuthenticated: !!currentUser }}>
       {children}
     </AuthContext.Provider>
   );

@@ -42,8 +42,9 @@ const Dashboard = () => {
     .slice(0, 4);
 
   const getSubjectName = (subjectId) => {
-    const sub = subjects.find(s => s.id === subjectId);
-    return sub ? sub.name : 'Unknown Subject';
+    if (!subjectId) return '';
+    const subject = subjects.find(s => s.id === subjectId);
+    return subject ? subject.name : subjectId;
   };
 
   const PASTEL_COLORS = ['#EDE7FF', '#E8F4FF', '#FFF3E3', '#E8FAF0', '#FFEAF2'];
@@ -77,15 +78,8 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <div className="dashboard-hero">
         <div className="hero-content">
-          <h1>Welcome back, {currentUser?.name || 'Student'}! <span className="wave">👋</span></h1>
+          <h1>Welcome back, {currentUser?.name || 'Student'}!</h1>
           <p>Small steps today lead to big achievements tomorrow.<br/>Keep going! You're doing great!</p>
-        </div>
-        <div className="hero-decoration">
-          <svg width="150" height="150" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="40" fill="#7C3AED" fillOpacity="0.1" />
-            <path d="M30 70 L70 30" stroke="#7C3AED" strokeWidth="4" strokeLinecap="round" />
-            <path d="M40 70 L70 40" stroke="#7C3AED" strokeWidth="4" strokeLinecap="round" />
-          </svg>
         </div>
       </div>
 
@@ -169,7 +163,7 @@ const Dashboard = () => {
                   </div>
                   <div className="dash-task-details">
                     <h4>{task.title}</h4>
-                    <p>{getSubjectName(task.subjectId)} &bull; Due: {task.dueDate}</p>
+                    <p>{getSubjectName(task.subjectId) ? getSubjectName(task.subjectId) + ' • ' : ''}Due: {task.dueDate}</p>
                   </div>
                   <div className="dash-task-badge">Today</div>
                 </div>
@@ -222,11 +216,6 @@ const Dashboard = () => {
                 <span>View Schedule</span>
               </button>
             </div>
-          </div>
-          
-          <div className="dash-widget motivation-widget" style={{ backgroundImage: 'linear-gradient(to right, #E8F4FF, #F5F1FF)' }}>
-            <h3>You can do it! <span className="sparkles">✨</span></h3>
-            <p>Discipline today, freedom tomorrow.</p>
           </div>
         </div>
       </div>

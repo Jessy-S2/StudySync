@@ -152,7 +152,7 @@
 }
 
 .type-event { background: rgba(123, 76, 194, 0.2); border-left: 2px solid #7B4CC2; }
-.type-task { background: rgba(52, 152, 219, 0.2); border-left: 2px solid #5B2DBB; }
+.type-task { background: rgba(52, 152, 219, 0.2); border-left: 2px solid var(--primary-color, #5B2DBB); }
 .type-session { background: rgba(46, 204, 113, 0.2); border-left: 2px solid #2ecc71; }
 
 .cal-item.completed {
@@ -205,7 +205,7 @@
 }
 
 .tooltip-item.type-event .dot { background: #7B4CC2; }
-.tooltip-item.type-task .dot { background: #5B2DBB; }
+.tooltip-item.type-task .dot { background: var(--primary-color, #5B2DBB); }
 .tooltip-item.type-session .dot { background: #2ecc71; }
 
 .tooltip-item.completed {

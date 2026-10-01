@@ -29,7 +29,7 @@
 
 .range-read-only {
   font-weight: 500;
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
 }
 
 .weekly-toolbar { position: sticky; top: 0; z-index: 10; background-color: #F8F5FC; padding: 15px; border-radius: 8px; border: 1px solid #E6E4EF;
@@ -119,7 +119,7 @@
 }
 
 .col-resizer:hover {
-  background-color: #5B2DBB;
+  background-color: var(--primary-color, #5B2DBB);
 }
 
 .weekly-table td {
@@ -152,11 +152,11 @@
 }
 
 .row-resizer:hover {
-  background-color: #5B2DBB;
+  background-color: var(--primary-color, #5B2DBB);
 }
 
 .grid-cell.selected {
-  outline: 2px solid #5B2DBB;
+  outline: 2px solid var(--primary-color, #5B2DBB);
   outline-offset: -2px;
 }
 
@@ -240,7 +240,7 @@
 .time-edit-input { width: 100%; text-align: center; border: none !important; background: transparent !important; box-shadow: none !important; font-weight: 600; color: #6F6878; font-size: 14px; outline: none; padding: 0; margin: 0; }
 
 .time-edit-input:focus {
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
 }
 
 .global-time-editors {
@@ -248,7 +248,7 @@
   align-items: center;
   gap: 15px;
   font-weight: 500;
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
 }
 
 .time-stepper {
@@ -270,7 +270,7 @@
 }
 
 .stepper-btn:hover {
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
   transform: scale(1.2);
 }
 

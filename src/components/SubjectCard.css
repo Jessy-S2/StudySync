@@ -13,7 +13,7 @@
 .subject-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-  border-color: #5B2DBB;
+  border-color: var(--primary-color, #5B2DBB);
 }
 
 .subject-card-header {
@@ -46,7 +46,7 @@
 }
 
 .edit-btn {
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
 }
 .edit-btn:hover {
   background-color: rgba(52, 152, 219, 0.1);

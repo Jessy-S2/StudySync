@@ -31,7 +31,7 @@
 }
 
 .ft-time:hover {
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
 }
 
 .ft-controls button {
@@ -44,12 +44,12 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
   transition: all 0.2s;
   font-size: 14px;
 }
 
 .ft-controls button:hover {
-  background: #5B2DBB;
+  background: var(--primary-color, #5B2DBB);
   color: #FFFFFF;
 }

@@ -22,7 +22,7 @@
 }
 
 .start, .resume {
-  background-color: #5B2DBB;
+  background-color: var(--primary-color, #5B2DBB);
   color: white;
 }
 .start:hover:not(:disabled), .resume:hover {
@@ -30,7 +30,7 @@
 }
 
 .pause {
-  background-color: #5B2DBB;
+  background-color: var(--primary-color, #5B2DBB);
   color: white;
 }
 .pause:hover {

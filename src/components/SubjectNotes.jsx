@@ -2,6 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { getFilesBySubject, updateFileGenerationStatus, updateFileGeneratedData, getFile } from '../utils/fileStorage';
 import { generateStudyMaterial } from '../services/geminiService';
+import { useSettings } from '../context/SettingsContext';
 
 const SubjectNotes = ({ subjectId }) => {
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ const SubjectNotes = ({ subjectId }) => {
       const record = await getFile(file.fileId);
 
       // 3. Generate structured material using the original PDF blob
-      const generatedData = await generateStudyMaterial(record.blob, onProgress);
+      const generatedData = await generateStudyMaterial(record.blob, onProgress, settings.ai);
       
       // 4. Save and mark completed
       await updateFileGeneratedData(file.fileId, generatedData);

@@ -47,7 +47,7 @@
   align-items: center;
   justify-content: center;
   color: #FFFFFF;
-  background-color: #5B2DBB;
+  background-color: var(--primary-color, #5B2DBB);
   min-width: 36px;
   width: 36px;
   height: 36px;
@@ -86,7 +86,7 @@
 
 .sidebar-toggle-btn:hover {
   background-color: rgba(91, 45, 187, 0.1);
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
 }
 
 .sidebar-nav {
@@ -145,7 +145,7 @@
 }
 
 .sidebar-nav a.active svg {
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
 }
 
 .sidebar-bottom {
@@ -195,7 +195,7 @@
 }
 
 .settings-link.active svg {
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
 }
 
 .sidebar.collapsed .nav-text {
@@ -371,9 +371,9 @@
 
   .sidebar-nav ul li a.active,
   .sidebar.collapsed .sidebar-nav ul li a.active {
-    color: #5B2DBB !important;
+    color: var(--primary-color, #5B2DBB) !important;
     background: transparent !important;
-    border-top: 3px solid #5B2DBB !important;
+    border-top: 3px solid var(--primary-color, #5B2DBB) !important;
   }
 
   .sidebar-nav ul li a svg,
@@ -419,7 +419,7 @@
 
   .settings-link.active,
   .sidebar.collapsed .settings-link.active {
-    border-top: 3px solid #5B2DBB !important;
+    border-top: 3px solid var(--primary-color, #5B2DBB) !important;
   }
   
   .settings-link svg,

@@ -108,7 +108,7 @@
 
 .unit-info h3 {
   margin: 0 0 5px 0;
-  color: #5B2DBB;
+  color: var(--primary-color, #5B2DBB);
   font-size: 16px;
 }
 
@@ -137,7 +137,7 @@
 .clickable-unit-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(91, 45, 187, 0.1);
-  border-color: #5B2DBB;
+  border-color: var(--primary-color, #5B2DBB);
 }
 
 

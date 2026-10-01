@@ -37,7 +37,7 @@
 }
 
 .timer-circle.studying {
-  border-color: #5B2DBB;
+  border-color: var(--primary-color, #5B2DBB);
 }
 
 .timer-circle.paused {
