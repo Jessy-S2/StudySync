@@ -1,13 +1,11 @@
 const fs = require('fs');
 let code = fs.readFileSync('src/services/geminiService.js', 'utf8');
 
-// Replace model name
 code = code.replace(
-  /const GEMINI_MODEL = "gemini-3\.6-flash";/,
+  /const GEMINI_MODEL = 'gemini-3\.5-flash-lite';/,
   'const GEMINI_MODEL = "gemini-2.5-flash";'
 );
 
-// Add detailed logging
 const generateFunctionMatch = /export const generateStudyMaterial = async \(pdfBlob, onProgress, settings\) => \{\s*try \{/m;
 
 const loggingCode = `
@@ -15,7 +13,6 @@ export const generateStudyMaterial = async (pdfBlob, onProgress, settings) => {
   try {
     const ai = getGeminiClient();
     
-    // Log info
     console.error("--- DEBUG: Gemini API Request Info ---");
     console.error("Gemini Model:", GEMINI_MODEL);
     console.error("API Key Present:", !!import.meta.env.VITE_GEMINI_API_KEY);
@@ -38,8 +35,6 @@ code = code.replace(
   loggingCode
 );
 
-// We need to also add detailed error logging in the catch block of generateContent
-const catchBlockMatch = /\} catch \(error\) \{\s*console\.error\("Gemini Generation Error:", error\);/m;
 const catchLoggingCode = `} catch (error) {
     console.error("Gemini Generation Error:", error);
     console.error("Actual Gemini API error message:", error.message);
@@ -53,4 +48,4 @@ code = code.replace(
 );
 
 fs.writeFileSync('src/services/geminiService.js', code);
-console.log('geminiService.js updated');
+console.log('geminiService.js fixed');

@@ -6,6 +6,7 @@ import { useSettings } from '../context/SettingsContext';
 
 const SubjectNotes = ({ subjectId }) => {
   const navigate = useNavigate();
+  const { settings } = useSettings();
   const [units] = useState(() => {
     const saved = localStorage.getItem('studysync_units');
     if (saved) {
@@ -74,7 +75,7 @@ const SubjectNotes = ({ subjectId }) => {
       fetchFiles();
     } catch (err) {
       console.error(err);
-      await updateFileGenerationStatus(file.fileId, 'error');
+      await updateFileGenerationStatus(file.fileId, 'error', err.message);
       setProgressStatus(prev => ({ ...prev, [file.fileId]: `Generation failed: ${err.message}` }));
       fetchFiles();
     }
@@ -133,7 +134,7 @@ const SubjectNotes = ({ subjectId }) => {
                           
                           {status === 'error' && (
                             <p style={{ margin: '5px 0 0', fontSize: '14px', color: '#e74c3c' }}>
-                              {progressStatus[file.fileId] || "Generation failed. Please try again."}
+                              {progressStatus[file.fileId] || file.generationError || "Generation failed. Please try again."}
                             </p>
                           )}
                         </div>

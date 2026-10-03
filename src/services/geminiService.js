@@ -1,6 +1,6 @@
 ﻿import { GoogleGenAI, Type } from '@google/genai';
 
-const GEMINI_MODEL = 'gemini-3.5-flash-lite';
+const GEMINI_MODEL = "gemini-3.8-flash";
 
 const getGeminiClient = () => {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -139,7 +139,6 @@ REQUIREMENTS:
             systemInstruction: systemInstruction,
             responseMimeType: "application/json",
             responseSchema: schema,
-            temperature: 0.2
           }
         });
         break; // Success, exit loop
@@ -171,6 +170,14 @@ REQUIREMENTS:
 
   } catch (error) {
     console.error("Gemini Generation Error:", error);
+    console.error("Actual Gemini API error message:", error.message);
+    if (error.status) console.error("HTTP/status info:", error.status);
+    if (error.response) console.error("Error Response info:", error.response);
+    if (error.details) console.error("Error Details:", error.details);
+    console.error("Actual Gemini API error message:", error.message);
+    if (error.status) console.error("HTTP/status info:", error.status);
+    if (error.response) console.error("Error Response info:", error.response);
+    if (error.details) console.error("Error Details:", error.details);
     
     const msg = error.message || "";
     
@@ -263,7 +270,6 @@ When explaining diagrams or figures, describe what the visual represents and how
           contents: contents,
           config: {
             systemInstruction: systemInstruction,
-            temperature: 0.3
           }
         });
         break; // Success, exit loop

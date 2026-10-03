@@ -116,7 +116,7 @@ export const updateFileGeneratedData = async (fileId, generatedData) => {
   });  
 };  
 
-export const updateFileGenerationStatus = async (fileId, status) => {  
+export const updateFileGenerationStatus = async (fileId, status, errorMsg = null) => {  
   const db = await initDB();  
   return new Promise((resolve, reject) => {  
     const transaction = db.transaction([STORE_NAME], 'readwrite');  
@@ -125,7 +125,8 @@ export const updateFileGenerationStatus = async (fileId, status) => {
     getRequest.onsuccess = (event) => {  
       const record = event.target.result;  
       if (record) {  
-        record.generationStatus = status;  
+        record.generationStatus = status;
+          if (errorMsg) record.generationError = errorMsg;  
         const putRequest = store.put(record);  
         putRequest.onsuccess = () => resolve();  
         putRequest.onerror = (e) => reject(new Error("Failed to update status: " + e.target.error));  
